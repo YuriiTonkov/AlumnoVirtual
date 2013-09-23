@@ -1,0 +1,5 @@
+<Alloy>
+	<TableViewRow  editable="true" data="{IdAlumno}" hasDetail="true" id="tblAlumnoRow" >
+		<Label class="rowTitle" id="lblAlumno" text="{nombrecompleto}" textid="{IdAlumno}"/>
+	</TableViewRow>
+</Alloy>

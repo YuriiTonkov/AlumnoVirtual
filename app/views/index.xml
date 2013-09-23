@@ -1,5 +1,10 @@
 <Alloy>
-	<Window class="container">
-		<Label id="label" onClick="doClick">Hello, World</Label>
-	</Window>
+	<Collection src="Alumno">
+	<Collection src="Alumno_Asignatura">
+	<Collection src="Asignatura">
+	<TabGroup id="GrupoTab" class="mainWindow">
+		<Require src="TabPrincipal"/>
+		<Require src="TabCalendario"/>
+		<Require src="TabConfiguracion"/>
+	</TabGroup>
 </Alloy>
