@@ -8,11 +8,11 @@ exports.definition = {
 		},
 		adapter: {
 			type: "sql",
-			collection_name: "Alumno_Asignatura",
-            db_file: "/Alumno_VirtualDB.sqlite",
-            db_name: "AulaVirtual",
+			collection_name: "AlumnoAsignatura",
+            db_file: "/AlumnoVirtualDB.sqlite",
+            db_name: "AlumnoVirtual",
             idAttribute: "IdAlumnoAsignatura",
-            remoteBackup:"false"
+            remoteBackup:"true"
 		}
 	},		
 	extendModel: function(Model) {		

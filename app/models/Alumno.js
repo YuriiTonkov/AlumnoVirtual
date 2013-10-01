@@ -10,21 +10,21 @@ exports.definition = {
 		    "TelContacto": "integer",
 		    "TelContacto2": "integer",
 		    "Email": "string",
-		    "Clase": "int",
+		    "Clase": "string",
 		    "Padre": "string",
             "Madre": "string",
             "Email2": "string",
             "foto1_url": "string",
             "foto2_url": "string",
-            "IdUsuario":"integer"
+            "IdUsuario":"string"
 		},
 		adapter: {
 			type: "sql",
 			collection_name: "Alumno",
-            db_file: "/Alumno_VirtualDB.sqlite",
-            db_name: "AulaVirtual",
+            db_file: "/AlumnoVirtualDB.sqlite",
+            db_name: "AlumnoVirtual",
             idAttribute: "IdAlumno",
-            remoteBackup:"false"
+            remoteBackup:"true"
 		}
 	},		
 	extendModel: function(Model) {		

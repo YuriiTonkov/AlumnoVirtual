@@ -3,9 +3,7 @@ $.tblAlumnoRow.addEventListener("click", function(e){
     if (e.detail==1){
         var alumnos = Alloy.Collections.Alumno;
         var idAlu = e.source.data;
-        var model = alumnos.get(idAlu);
-        var array = model.toJSON();
-        var tabAlumnosController = Alloy.createController("NuevoAlumno", {"IdAlumno":idAlu,"IdClase":array.Clase});
+        var tabAlumnosController = Alloy.createController("Alumno", {"IdAlumno":idAlu});
         Alloy.Globals.GrupoTab.activeTab.open(tabAlumnosController.getView());
     }
     else{

@@ -1,0 +1,86 @@
+//Estilo redondeado para todas las tablas de la aplicacion
+"TableView": {
+  style : Ti.UI.iPhone.TableViewStyle.GROUPED,
+  backgroundColor : "transparent"}
+ 
+//Todas las filas de las tablas llevan de fondo color blanco  
+"TableViewRow":{
+	backgroundColor : "white",
+	height:"40dp"
+}
+
+//Estilo de los titulos de las filas de las tablas
+".rowTitle": {
+	"width": "100%",
+	"height": "40dp",
+	"textAlign": "left",
+	"left": "10dp"
+}
+
+//Estilo de los titulos de las filas de la tabla de Cursos.
+"#lblCurso":{
+    width: Ti.UI.FILL,
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    "left": "10dp",
+    "top": "-6dp"		
+} 
+
+//Estilo de los subtitulos de las filas de las tablas
+".rowSubTitle": {
+	"width": "100%",
+	"height": "10dp",
+	"top":"26dp",
+	"font": {fontSize:10,fontFamily:'HelveticaNeue'},
+	"textAlign": "left",
+	"left": "10dp"
+}
+
+"#imageLblCurso": {
+	right: 10,
+	width: 30,
+	height: 30
+}
+
+
+//Pendiente de cambiar el fondo en funcion del telefono en el controlador...
+".mainWindow[platform=ios formFactor=max-height:480dp]" : {
+backgroundImage : "library/images/iphone/backGround320x480Base.png"
+}
+".mainWindow[platform=ios formFactor=max-height:568dp]" : {
+backgroundImage : "library/images/iphone/backGround640x1136Base.png"
+}
+
+//Estilo para los scrollview
+".ScrollView":{
+	backgroundColor : "transparent"
+}
+
+"#viewAlumno":{
+	backgroundColor : "white",
+	"borderRadius":"5dp",
+	 "top":"0dp",
+	 "left":"24dp",
+	 "width":"85%"
+}
+
+//Estilo de las label de la ventana NuevoAlumno
+".labelAlumno": {
+	"width": "100%",
+	"height": "16dp",
+	"textAlign": "left",
+	"left": "6dp",
+	"top": "20dp",
+	"font": {fontSize:10,fontFamily:'HelveticaNeue'}
+}
+
+//Estilo de las cajas de texto de la ventana NuevoAlumno
+".textboxAlumno": {
+	"borderRadius":"3dp",
+	"backgroundColor": "EEE",
+	"width": "94%",
+	"height": "24dp",
+	"textAlign": "left",
+	"left": "7dp"
+}
+
+

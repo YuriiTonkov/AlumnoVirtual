@@ -2,6 +2,8 @@
 	<Collection src="Alumno">
 	<Collection src="Alumno_Asignatura">
 	<Collection src="Asignatura">
+	<Collection src="Notificacion">
+	<Collection src="Tipo_Notificacion">
 	<TabGroup id="GrupoTab" class="mainWindow">
 		<Require src="TabPrincipal"/>
 		<Require src="TabCalendario"/>

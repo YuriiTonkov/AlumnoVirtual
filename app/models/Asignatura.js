@@ -5,16 +5,16 @@ exports.definition = {
 		    "Nombre": "string",
 		    "Descripcion": "string",
 		    "Optativa": "boolean",
-		    "Curso": "int",
-		    "Favorita": "int"
+		    "Curso": "string"
+		   
 		},
 		adapter: {
 			type: "sql",
 			collection_name: "Asignatura",
-            db_file: "/Alumno_VirtualDB.sqlite",
-			db_name: "AulaVirtual",
+            db_file: "/AlumnoVirtualDB.sqlite",
+			db_name: "AlumnoVirtual",
 			idAttribute: "IdAsignatura",
-			remoteBackup:"false"
+			remoteBackup:"true"
 		}
 	},		
 	extendModel: function(Model) {		

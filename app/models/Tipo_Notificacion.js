@@ -7,7 +7,11 @@ exports.definition = {
 		},
 		adapter: {
 			type: "sql",
-			collection_name: "Tipo_Notificacion"
+			collection_name: "TipoNotificacion",
+            db_file: "/AlumnoVirtualDB.sqlite",
+            db_name: "AlumnoVirtual",
+            idAttribute: "IdTipoNotificacion",
+            remoteBackup:"true"
 		}
 	},
 	extendModel: function(Model) {

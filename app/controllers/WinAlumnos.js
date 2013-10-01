@@ -1,25 +1,13 @@
-//Argumentos trasladados
-var arg1 = arguments[0] || {};
-var data = [];
-data = arg1;
-//----------------------------
 
 //Elementos de Interfaz
-$.WinAlumnos.title = data.Nombre;
-var tab = Alloy.createController("BotoneraClase", {"IdClase":data.IdClase});
-$.WinAlumnos.setRightNavButton(tab.getView());
+$.WinAlumnos.title = "Alumnos";
+$.WinAlumnos.setRightNavButton($.addAlumno);
 //-----------------------------------------
-
 
 var alumnos = Alloy.Collections.Alumno;
 alumnos.fetch();
 
 //Funciones--------------------------
-
-function filtrado (collection){
-    var coleccion_filtrada = collection.where({Clase: data.IdClase});
-    return coleccion_filtrada;
-}
 
 function nombrecompleto(model){
     var transform = model.toJSON();
@@ -27,8 +15,10 @@ function nombrecompleto(model){
     return transform;
 }
 
-
-//-----------------------------------------
+function NuevoAlumno(){
+	var tabAlumnosController = Alloy.createController("Alumno", {});
+    Alloy.Globals.GrupoTab.activeTab.open(tabAlumnosController.getView());
+}
 
 //Listeners-----------------------------
 
@@ -43,8 +33,6 @@ $.TablaAlumnos.addEventListener('delete', function(e)
     alumnos.fetch();
 });
 
-
-//--------------------------------
 
 // Free model-view data binding resources when this view-controller closes
 $.WinAlumnos.addEventListener('close', function() {
