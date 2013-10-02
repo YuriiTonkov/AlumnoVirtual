@@ -104,7 +104,8 @@ function GuardarAlumno(){
         modelActual.save();
         //Si ya tenia un usuario cloud deberemos actualizarlo cuando se actualicen los datos
         if (modelActual.UsuarioCloud=true){
-        	Cloud.Users.update({email: datos.Email,
+        	Cloud.Users.update({
+        		email: datos.Email,
 			    first_name: datos.Nombre,
 			    last_name: datos.Apellido1,
 			    password: 'AlumnoVirtual',
@@ -120,13 +121,14 @@ function GuardarAlumno(){
 			    			   "Email2": datos.Email2,
 			    			   "Apellido2": datos.Apellido2,
 			    			   "Clase": datos.Clase
-			    			   }}, function (e) {
-            if (e.success) {
-                alert('Updated!');
-            }
-            else {
-                error(e);
-            }
+			    			   }
+			    }, function (e) {
+		            if (e.success) {
+		                alert('Updated!');
+		            }
+		            else {
+		                error(e);
+            		}
         }
       
         }
