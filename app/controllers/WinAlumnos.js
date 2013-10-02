@@ -34,6 +34,7 @@ $.TablaAlumnos.addEventListener('delete', function(e)
 });
 
 
+
 // Free model-view data binding resources when this view-controller closes
 $.WinAlumnos.addEventListener('close', function() {
     $.destroy();

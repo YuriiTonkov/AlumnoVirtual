@@ -10,7 +10,7 @@ var alumno = Alloy.Collections.Alumno;
 if (data.IdAlumno == undefined){
     //$.btnAnterior.visible="false";
    // $.btnSiguiente.visible="false";
-   $.btnAnotacion.visible = "false";
+   $.btnEnviar.visible = "false";
 }else{
         //Si viene un idalumno, la pantalla debe ser de actualizacion, se deben mostrar los datos
        // $.btnAnterior.visible="true";
@@ -36,6 +36,21 @@ if (data.IdAlumno == undefined){
             $.imgAlumno.image = datos.foto1_url;
             $.imgAlumno.visible=true;
         }
+        //Si tiene usuario en la nube nos logueamos para poder acceder a su información o actualizarla.
+        if (datos.UsuarioCloud==true){
+		//Ya tiene usuario en la nube
+				Cloud.Users.login({ 
+		    	login: datos.Email,
+		    	password: "AlumnoVirtual"
+				}, function(e) {
+		    		if (e.success) {
+		        		Ti.API.info("Logged in user, id = " + e.users[0].id + ", session ID = " + Cloud.sessionId);
+		    		} else {
+		        		Ti.API.info("Login failed.");
+		    		}
+				});
+		$.btnEnviar.visible=false;
+		}	
     }
 
 //Funciones --------------------------------------------------------------------------------------------------------
@@ -71,7 +86,7 @@ function GuardarAlumno(){
             dialog1.show(); 
     }else{
     //Al venir idAlumno con un valor quiere decir que es una actualizacion
-        var modelActual = coleccion_filtrada.getElement();
+        var modelActual = coleccionAlumnos.get(data.IdAlumno);
         modelActual.set({Nombre:$.txtNombre.value, 
                        Apellido1:$.txtApellido1.value,   
                        Apellido2:$.txtApellido2.value, 
@@ -87,14 +102,41 @@ function GuardarAlumno(){
                        Clase:$.txtClase.value});
                        //Titanium.API.info("Se almacena la ruta de la imagen: "+$.imgAlumno.image);
         modelActual.save();
-        
+        //Si ya tenia un usuario cloud deberemos actualizarlo cuando se actualicen los datos
+        if (modelActual.UsuarioCloud=true){
+        	Cloud.Users.update({email: datos.Email,
+			    first_name: datos.Nombre,
+			    last_name: datos.Apellido1,
+			    password: 'AlumnoVirtual',
+			    password_confirmation: 'AlumnoVirtual',
+			    role: 'Alumno',
+			    photo: Titanium.Filesystem.getFile(datos.foto1_url),
+			    custom_fields:{"Madre":datos.Madre, 
+			    			   "Padre":datos.Padre,
+			    			   "Direccion": datos.Direccion,
+			    			   "CodPostal": datos.CodPostal,
+			    			   "Telefono1": datos.Telefono1,
+			    			   "Telefono2": datos.Telefono2,
+			    			   "Email2": datos.Email2,
+			    			   "Apellido2": datos.Apellido2,
+			    			   "Clase": datos.Clase
+			    			   }}, function (e) {
+            if (e.success) {
+                alert('Updated!');
+            }
+            else {
+                error(e);
+            }
+        }
+      
+        }
         var dialog2 = Ti.UI.createAlertDialog({
             title: 'La información del alumno se ha almacenado correctamente.',
             style: Ti.UI.iPhone.AlertDialogStyle.DEFAULT,
             buttonNames: ['Aceptar'],
              });
             dialog2.show();
-    }
+    
     
     
     
@@ -118,9 +160,66 @@ function sacarFoto(){
 });
 }
 
-function TomarAnotacion(){
-    var tabAnotacionController = Alloy.createController("notasAlumno", {"IdAlumno":data.IdAlumno, "Nombre":data.Nombre});
-    Alloy.Globals.GrupoTab.activeTab.open(tabAnotacionController.getView());
+function EnviarDatos(){
+	
+	//Primero habrá que loguearse en el ACS o si no se tiene usuario, crear uno.
+	//Si se tiene creado el usuario estará indicado en la BD.
+	if (datos.UsuarioCloud==true){
+		//Ya tiene usuario en la nube
+				Cloud.Users.login({ 
+		    	login: datos.Email,
+		    	password: "AlumnoVirtual"
+				}, function(e) {
+		    		if (e.success) {
+		        		Ti.API.info("Logged in user, id = " + e.users[0].id + ", session ID = " + Cloud.sessionId);
+		    		} else {
+		        		Ti.API.info("Login failed.");
+		    		}
+				});
+	}
+	else{
+		//Aun no tiene usuario, procedemos a crearlo
+			Cloud.Users.create({
+			    email: datos.Email,
+			    first_name: datos.Nombre,
+			    last_name: datos.Apellido1,
+			    password: 'AlumnoVirtual',
+			    password_confirmation: 'AlumnoVirtual',
+			    role: 'Alumno',
+			    photo: Titanium.Filesystem.getFile(datos.foto1_url),
+			    custom_fields:{"Madre":datos.Madre, 
+			    			   "Padre":datos.Padre,
+			    			   "Direccion": datos.Direccion,
+			    			   "CodPostal": datos.CodPostal,
+			    			   "Telefono1": datos.Telefono1,
+			    			   "Telefono2": datos.Telefono2,
+			    			   "Email2": datos.Email2,
+			    			   "Apellido2": datos.Apellido2,
+			    			   "Clase": datos.Clase
+			    			   }
+		}, function (e) {
+		    if (e.success) {
+			    //Una vez creado actualizamos el valor en BD del campo UsuarioCloud a true
+			    var coleccionAlu = Alloy.Collections.Alumno;
+			    var modelActual = coleccionAlu.get(data.IdAlumno);
+	       		modelActual.set({UsuarioCloud:true});
+				modelActual.save();
+				
+				//AVISO 
+				var user = e.users[0];
+		        alert('Success:\n' +
+		            'id: ' + user.id + '\n' +
+		            'sessionId: ' + Cloud.sessionId + '\n' +
+		            'first name: ' + user.first_name + '\n' +
+		            'last name: ' + user.last_name);
+			
+		    } else {
+		        alert('Error:\n' +
+		            ((e.error && e.message) || JSON.stringify(e)));
+		    }
+		});
+}
+
 }
 
 
@@ -128,6 +227,19 @@ function TomarAnotacion(){
 
 
 //Listeners -------------------------------------------------------------------------------------------------
+// Cuando salimos de la página se hace logout del usuario
+$.winNuevoAlumno.addEventListener('close', function() {
+    Cloud.Users.logout(function (e) {
+        if (e.success) {
+            
+        }
+        else {
+        	alert('Error:\n' +
+		            ((e.error && e.message) || JSON.stringify(e)));
+         }
+    });
+});
+
 $.txtClase.addEventListener("click", function(){
         var dialog = Ti.UI.createAlertDialog({
             title: 'Introduzca la clase',
