@@ -17,7 +17,8 @@ exports.definition = {
             "foto1_url": "string",
             "foto2_url": "string",
             "IdUsuario":"string",
-            "UsuarioCloud":"boolean"
+            "UsuarioCloud":"boolean",
+            "EmailProfesor":"string"
 		},
 		adapter: {
 			type: "sql",

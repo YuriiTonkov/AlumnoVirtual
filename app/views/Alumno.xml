@@ -1,6 +1,6 @@
 <Alloy>
 	<Window id="winNuevoAlumno" class="container">
-		<ScrollView id="scrollView" top="15%" showVerticalScrollIndicator="true" showHorizontalScrollIndicator="false" height="90%" width="100%"  >
+		<ScrollView id="scrollView" top="15%" showVerticalScrollIndicator="true" showHorizontalScrollIndicator="false" height="85%" width="100%"  >
 		   <View id="viewAlumno" >
 			 	<Label class="labelAlumno" top ="0dp" >Nombre </Label>
 				<TextField top ="15dp"  class="textboxAlumno" id="txtNombre" editable="false" ></TextField>
@@ -26,6 +26,8 @@
 				<TextField class="textboxAlumno" top ="465dp" id="txtMadre" editable="false"></TextField>
 				<Label class="labelAlumno" top ="495dp">Clase</Label>
 				<TextField class="textboxAlumno" top ="510dp" id="txtClase" editable="false"></TextField>
+				<Label class="labelAlumno" top ="540dp">Email Profesor:</Label>
+				<TextField class="textboxAlumno" top ="555dp" id="txtEmailProf" editable="false"></TextField>
 			</View>
 		</ScrollView>
 		<ImageView  left="10%" id="imgAlumno" height="15%" width="16%" top="2%" onClick="sacarFoto"></ImageView>

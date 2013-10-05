@@ -1,56 +1,54 @@
 exports.definition = {
-	config: {
-		columns: {
-		    "IdAlumno": "int",
-		    "Nombre": "string",
-            "Apellido1": "string",
-            "Apellido2": "string",
-		    "Direccion": "string",
-		    "CodPostal": "int",
-		    "TelContacto": "integer",
-		    "TelContacto2": "integer",
-		    "Email": "string",
-		    "Clase": "string",
-		    "Padre": "string",
-            "Madre": "string",
-            "Email2": "string",
-            "foto1_url": "string",
-            "foto2_url": "string",
-            "IdUsuario":"string",
-            "UsuarioCloud":"boolean"
-		},
-		adapter: {
-			type: "sql",
-			collection_name: "Alumno",
+    config: {
+        columns: {
+            IdAlumno: "int",
+            Nombre: "string",
+            Apellido1: "string",
+            Apellido2: "string",
+            Direccion: "string",
+            CodPostal: "int",
+            TelContacto: "integer",
+            TelContacto2: "integer",
+            Email: "string",
+            Clase: "string",
+            Padre: "string",
+            Madre: "string",
+            Email2: "string",
+            foto1_url: "string",
+            foto2_url: "string",
+            IdUsuario: "string",
+            UsuarioCloud: "boolean",
+            EmailProfesor: "string"
+        },
+        adapter: {
+            type: "sql",
+            collection_name: "Alumno",
             db_file: "/AlumnoVirtualDB.sqlite",
             db_name: "AlumnoVirtual",
             idAttribute: "IdAlumno",
-            remoteBackup:"true"
-		}
-	},		
-	extendModel: function(Model) {		
-		_.extend(Model.prototype, {
-			// extended functions and properties go here
-		});
-		
-		return Model;
-	},
-	extendCollection: function(Collection) {		
-		_.extend(Collection.prototype, {
-			// extended functions and properties go here
-			
-            getAlumnosFromClase: function(idClase){
-                var consulta="SELECT * FROM ALUMNO WHERE Clase="+idClase;
-                this.fetch({query:consulta});
+            remoteBackup: "true"
+        }
+    },
+    extendModel: function(Model) {
+        _.extend(Model.prototype, {});
+        return Model;
+    },
+    extendCollection: function(Collection) {
+        _.extend(Collection.prototype, {
+            getAlumnosFromClase: function(idClase) {
+                var consulta = "SELECT * FROM ALUMNO WHERE Clase=" + idClase;
+                this.fetch({
+                    query: consulta
+                });
                 return this;
             },
             getElement: function() {
-                    return this.currentElement;
-                  },
+                return this.currentElement;
+            },
             setElement: function(model) {
-                    this.currentElement = model;
-                  },
-            next: function (){
+                this.currentElement = model;
+            },
+            next: function() {
                 this.setElement(this.at(this.indexOf(this.getElement()) + 1));
                 return this;
             },
@@ -58,27 +56,17 @@ exports.definition = {
                 this.setElement(this.at(this.indexOf(this.getElement()) - 1));
                 return this;
             }
-		});
-		
-		return Collection;
-	}
+        });
+        return Collection;
+    }
 };
 
+var Alloy = require("alloy"), _ = require("alloy/underscore")._, model, collection;
 
+model = Alloy.M("Alumno", exports.definition, []);
 
-var Alloy = require('alloy'),
-    _ = require("alloy/underscore")._,
-	model, collection;
-
-model = Alloy.M('Alumno',
-	 exports.definition,
-	[]
-);
-
-collection = Alloy.C('Alumno',
-	 exports.definition,
-	 model
-);
+collection = Alloy.C("Alumno", exports.definition, model);
 
 exports.Model = model;
+
 exports.Collection = collection;

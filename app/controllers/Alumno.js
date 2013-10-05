@@ -32,6 +32,7 @@ if (data.IdAlumno == undefined){
         $.txtEmail2.value = datos.Email2;
         $.txtPadre.value = datos.Padre;
         $.txtMadre.value = datos.Madre;
+        $.txtEmailProf.value = datos.EmailProfesor;
         if (datos.foto1_url != undefined){
             $.imgAlumno.image = datos.foto1_url;
             $.imgAlumno.visible=true;
@@ -72,7 +73,8 @@ function GuardarAlumno(){
                                             Padre:$.txtPadre.value,
                                             Madre:$.txtMadre.value,
                                             foto1_url:$.imgAlumno.image,
-                                            Clase:$.txtClase.value});
+                                            Clase:$.txtClase.value,
+                                            EmailProfesor:$.txtEmailProf.value});
                                             //Titanium.API.info("Se almacena la ruta de la imagen: "+$.imgAlumno.image);
        
         coleccionAlumnos.add(alumno);
@@ -99,11 +101,12 @@ function GuardarAlumno(){
                        Padre:$.txtPadre.value,
                        Madre:$.txtMadre.value,
                        foto1_url:$.imgAlumno.image,
-                       Clase:$.txtClase.value});
+                       Clase:$.txtClase.value,
+                       EmailProfesor:$.txtEmailProf.value});
                        //Titanium.API.info("Se almacena la ruta de la imagen: "+$.imgAlumno.image);
         modelActual.save();
         //Si ya tenia un usuario cloud deberemos actualizarlo cuando se actualicen los datos
-        if (modelActual.UsuarioCloud=true){
+        if (modelActual.UsuarioCloud==true){
         	Cloud.Users.update({
         		email: datos.Email,
 			    first_name: datos.Nombre,
@@ -111,7 +114,7 @@ function GuardarAlumno(){
 			    password: 'AlumnoVirtual',
 			    password_confirmation: 'AlumnoVirtual',
 			    role: 'Alumno',
-			    photo: Titanium.Filesystem.getFile(datos.foto1_url),
+			    photo: (datos.foto1_url==null)?null:Titanium.Filesystem.getFile(datos.foto1_url),
 			    custom_fields:{"Madre":datos.Madre, 
 			    			   "Padre":datos.Padre,
 			    			   "Direccion": datos.Direccion,
@@ -120,7 +123,8 @@ function GuardarAlumno(){
 			    			   "Telefono2": datos.Telefono2,
 			    			   "Email2": datos.Email2,
 			    			   "Apellido2": datos.Apellido2,
-			    			   "Clase": datos.Clase
+			    			   "Clase": datos.Clase,
+			    			   "EmailProfesor": datos.EmailProfesor
 			    			   }
 			    }, function (e) {
 		            if (e.success) {
@@ -129,9 +133,9 @@ function GuardarAlumno(){
 		            else {
 		                error(e);
             		}
-        }
-      
-        }
+       });
+       }
+       
         var dialog2 = Ti.UI.createAlertDialog({
             title: 'La información del alumno se ha almacenado correctamente.',
             style: Ti.UI.iPhone.AlertDialogStyle.DEFAULT,
@@ -142,7 +146,8 @@ function GuardarAlumno(){
     
     
     
-}
+		}
+	}
 
 function sacarFoto(){
     Titanium.Media.showCamera({
@@ -161,7 +166,31 @@ function sacarFoto(){
     }
 });
 }
+function consultarDatos(emailProfesorParam,profesorParam,callback){
+	
+	Cloud.Users.query({
+		    page: 1,
+		    per_page: 1,
+		    where: {
+		        role: 'Profesor',
+		        email: emailProfesorParam
+		    }
+				}, function (e) {
+				    if (e.success) {
+				    	profesorParam = (e.users.length > 0)?e.users[0].id:'0';
+				        alert ('Profesor=' + profesorParam);
 
+				      } else {
+				      	profesorParam = '';
+				        alert('Error:\n' +
+				            ((e.error && e.message) || JSON.stringify(e)));
+				            
+				    }
+				    callback(emailProfesorParam, profesorParam);
+			});
+			
+			
+}
 function EnviarDatos(){
 	
 	//Primero habrá que loguearse en el ACS o si no se tiene usuario, crear uno.
@@ -181,47 +210,70 @@ function EnviarDatos(){
 	}
 	else{
 		//Aun no tiene usuario, procedemos a crearlo
-			Cloud.Users.create({
-			    email: datos.Email,
-			    first_name: datos.Nombre,
-			    last_name: datos.Apellido1,
-			    password: 'AlumnoVirtual',
-			    password_confirmation: 'AlumnoVirtual',
-			    role: 'Alumno',
-			    photo: Titanium.Filesystem.getFile(datos.foto1_url),
-			    custom_fields:{"Madre":datos.Madre, 
-			    			   "Padre":datos.Padre,
-			    			   "Direccion": datos.Direccion,
-			    			   "CodPostal": datos.CodPostal,
-			    			   "Telefono1": datos.Telefono1,
-			    			   "Telefono2": datos.Telefono2,
-			    			   "Email2": datos.Email2,
-			    			   "Apellido2": datos.Apellido2,
-			    			   "Clase": datos.Clase
-			    			   }
-		}, function (e) {
-		    if (e.success) {
-			    //Una vez creado actualizamos el valor en BD del campo UsuarioCloud a true
-			    var coleccionAlu = Alloy.Collections.Alumno;
-			    var modelActual = coleccionAlu.get(data.IdAlumno);
-	       		modelActual.set({UsuarioCloud:true});
-				modelActual.save();
-				
-				//AVISO 
-				var user = e.users[0];
-		        alert('Success:\n' +
-		            'id: ' + user.id + '\n' +
-		            'sessionId: ' + Cloud.sessionId + '\n' +
-		            'first name: ' + user.first_name + '\n' +
-		            'last name: ' + user.last_name);
+		//Primero comprobamos que existe el mail del profesor que ha introducido.
+		
+		
+		consultarDatos(datos.EmailProfesor, "",function(callbackEmail, callbackProf){
+				var profesor = callbackProf;
+		
+		
 			
-		    } else {
-		        alert('Error:\n' +
-		            ((e.error && e.message) || JSON.stringify(e)));
-		    }
-		});
-}
-
+			if (profesor == ''){
+				alert('El Mail de profesor no aparece en nuestra Base de Datos. Compruebe los datos');
+			}else{
+						Cloud.Users.create({
+						    email: datos.Email,
+						    first_name: datos.Nombre,
+						    last_name: datos.Apellido1,
+						    password: 'AlumnoVirtual',
+						    password_confirmation: 'AlumnoVirtual',
+						    role: 'Alumno',
+						   	photo: (datos.foto1_url==null)?null:Titanium.Filesystem.getFile(datos.foto1_url),
+						    custom_fields:{"Madre":datos.Madre, 
+						    			   "Padre":datos.Padre,
+						    			   "Direccion": datos.Direccion,
+						    			   "CodPostal": datos.CodPostal,
+						    			   "Telefono1": datos.Telefono1,
+						    			   "Telefono2": datos.Telefono2,
+						    			   "Email2": datos.Email2,
+						    			   "Apellido2": datos.Apellido2,
+						    			   "Clase": datos.Clase,
+						    			   "EmailProfesor": datos.EmailProfesor
+						    			   }
+					}, function (e) {
+					    if (e.success) {
+						    //Una vez creado actualizamos el valor en BD del campo UsuarioCloud a true
+						    var coleccionAlu = Alloy.Collections.Alumno;
+						    var modelActual = coleccionAlu.get(data.IdAlumno);
+				       		modelActual.set({UsuarioCloud:true});
+							modelActual.save();
+							
+							//AVISO 
+							var user = e.users[0];
+					        alert('Success:\n' +
+					            'id: ' + user.id + '\n' +
+					            'sessionId: ' + Cloud.sessionId + '\n' +
+					            'first name: ' + user.first_name + '\n' +
+					            'last name: ' + user.last_name);
+						
+					    } else {
+					        alert('Error:\n' +
+					            ((e.error && e.message) || JSON.stringify(e)));
+					    }
+					});
+				//Realizamos la solicitud al profesor para que pueda añadir al alumno a su dispositivo	
+				Cloud.Friends.add({
+				user_ids: profesor
+			}, function(e) {
+		        if (e.success) {
+			        alert('La solicitud se ha enviado al profesor.');
+		        } else {
+			        alert('La solicitud ha fallado.');
+		        }
+	        });
+				}
+			} );
+	}
 }
 
 
@@ -444,6 +496,23 @@ $.txtMadre.addEventListener("click", function(){
      
             }else{
                 $.txtMadre.value = e.text;
+            }
+        });
+        dialog.show();
+});
+
+$.txtEmailProf.addEventListener("click", function(){
+        var dialog = Ti.UI.createAlertDialog({
+            title: 'Introduzca el email del profesor',
+            style: Ti.UI.iPhone.AlertDialogStyle.PLAIN_TEXT_INPUT,
+            buttonNames: ['Aceptar', 'Cancelar'],
+            cancel: 1,
+             });
+        dialog.addEventListener('click', function(e){
+            if (e.index === e.source.cancel){
+     
+            }else{
+                $.txtEmailProf.value = e.text;
             }
         });
         dialog.show();
