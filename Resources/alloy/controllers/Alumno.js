@@ -47,24 +47,24 @@ function Controller() {
             });
             modelActual.save();
             true == modelActual.UsuarioCloud && Cloud.Users.update({
-                email: datos.Email,
-                first_name: datos.Nombre,
-                last_name: datos.Apellido1,
+                email: $.txtEmail.value,
+                first_name: $.txtNombre.value,
+                last_name: $.txtApellido1.value,
                 password: "AlumnoVirtual",
                 password_confirmation: "AlumnoVirtual",
                 role: "Alumno",
-                photo: null == datos.foto1_url ? null : Titanium.Filesystem.getFile(datos.foto1_url),
+                photo: null == datos.foto1_url ? null : Titanium.Filesystem.getFile($.imgAlumno.image),
                 custom_fields: {
-                    Madre: datos.Madre,
-                    Padre: datos.Padre,
-                    Direccion: datos.Direccion,
-                    CodPostal: datos.CodPostal,
-                    Telefono1: datos.Telefono1,
-                    Telefono2: datos.Telefono2,
-                    Email2: datos.Email2,
-                    Apellido2: datos.Apellido2,
-                    Clase: datos.Clase,
-                    EmailProfesor: datos.EmailProfesor
+                    Madre: $.txtMadre.value,
+                    Padre: $.txtPadre.value,
+                    Direccion: $.txtDireccion.value,
+                    CodPostal: $.txtCodPostal.value,
+                    Telefono1: $.txtTelefono.value,
+                    Telefono2: $.txtTelefono2.value,
+                    Email2: $.txtEmail.value,
+                    Apellido2: $.txtApellido2.value,
+                    Clase: $.txtClase.value,
+                    EmailProfesor: $.txtEmailProf.value
                 }
             }, function(e) {
                 e.success ? alert("Updated!") : error(e);
@@ -118,45 +118,43 @@ function Controller() {
             e.success ? Ti.API.info("Logged in user, id = " + e.users[0].id + ", session ID = " + Cloud.sessionId) : Ti.API.info("Login failed.");
         }) : consultarDatos(datos.EmailProfesor, "", function(callbackEmail, callbackProf) {
             var profesor = callbackProf;
-            if ("" == profesor) alert("El Mail de profesor no aparece en nuestra Base de Datos. Compruebe los datos"); else {
-                Cloud.Users.create({
-                    email: datos.Email,
-                    first_name: datos.Nombre,
-                    last_name: datos.Apellido1,
-                    password: "AlumnoVirtual",
-                    password_confirmation: "AlumnoVirtual",
-                    role: "Alumno",
-                    photo: null == datos.foto1_url ? null : Titanium.Filesystem.getFile(datos.foto1_url),
-                    custom_fields: {
-                        Madre: datos.Madre,
-                        Padre: datos.Padre,
-                        Direccion: datos.Direccion,
-                        CodPostal: datos.CodPostal,
-                        Telefono1: datos.Telefono1,
-                        Telefono2: datos.Telefono2,
-                        Email2: datos.Email2,
-                        Apellido2: datos.Apellido2,
-                        Clase: datos.Clase,
-                        EmailProfesor: datos.EmailProfesor
-                    }
-                }, function(e) {
-                    if (e.success) {
-                        var coleccionAlu = Alloy.Collections.Alumno;
-                        var modelActual = coleccionAlu.get(data.IdAlumno);
-                        modelActual.set({
-                            UsuarioCloud: true
-                        });
-                        modelActual.save();
-                        var user = e.users[0];
-                        alert("Success:\nid: " + user.id + "\n" + "sessionId: " + Cloud.sessionId + "\n" + "first name: " + user.first_name + "\n" + "last name: " + user.last_name);
-                    } else alert("Error:\n" + (e.error && e.message || JSON.stringify(e)));
-                });
+            "" == profesor ? alert("El Mail de profesor no aparece en nuestra Base de Datos. Compruebe los datos") : Cloud.Users.create({
+                email: datos.Email,
+                first_name: datos.Nombre,
+                last_name: datos.Apellido1,
+                password: "AlumnoVirtual",
+                password_confirmation: "AlumnoVirtual",
+                role: "Alumno",
+                photo: null == datos.foto1_url ? null : Titanium.Filesystem.getFile(datos.foto1_url),
+                custom_fields: {
+                    Madre: datos.Madre,
+                    Padre: datos.Padre,
+                    Direccion: datos.Direccion,
+                    CodPostal: datos.CodPostal,
+                    Telefono1: datos.Telefono1,
+                    Telefono2: datos.Telefono2,
+                    Email2: datos.Email2,
+                    Apellido2: datos.Apellido2,
+                    Clase: datos.Clase,
+                    EmailProfesor: datos.EmailProfesor
+                }
+            }, function(e) {
+                if (e.success) {
+                    var coleccionAlu = Alloy.Collections.Alumno;
+                    var modelActual = coleccionAlu.get(data.IdAlumno);
+                    modelActual.set({
+                        UsuarioCloud: true
+                    });
+                    modelActual.save();
+                    var user = e.users[0];
+                    alert("Success:\nid: " + user.id + "\n" + "sessionId: " + Cloud.sessionId + "\n" + "first name: " + user.first_name + "\n" + "last name: " + user.last_name);
+                } else alert("Error:\n" + (e.error && e.message || JSON.stringify(e)));
                 Cloud.Friends.add({
                     user_ids: profesor
                 }, function(e) {
                     e.success ? alert("La solicitud se ha enviado al profesor.") : alert("La solicitud ha fallado.");
                 });
-            }
+            });
         });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));

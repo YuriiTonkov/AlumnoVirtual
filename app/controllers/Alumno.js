@@ -108,23 +108,23 @@ function GuardarAlumno(){
         //Si ya tenia un usuario cloud deberemos actualizarlo cuando se actualicen los datos
         if (modelActual.UsuarioCloud==true){
         	Cloud.Users.update({
-        		email: datos.Email,
-			    first_name: datos.Nombre,
-			    last_name: datos.Apellido1,
+        		email: $.txtEmail.value,
+			    first_name: $.txtNombre.value,
+			    last_name: $.txtApellido1.value,
 			    password: 'AlumnoVirtual',
 			    password_confirmation: 'AlumnoVirtual',
 			    role: 'Alumno',
-			    photo: (datos.foto1_url==null)?null:Titanium.Filesystem.getFile(datos.foto1_url),
-			    custom_fields:{"Madre":datos.Madre, 
-			    			   "Padre":datos.Padre,
-			    			   "Direccion": datos.Direccion,
-			    			   "CodPostal": datos.CodPostal,
-			    			   "Telefono1": datos.Telefono1,
-			    			   "Telefono2": datos.Telefono2,
-			    			   "Email2": datos.Email2,
-			    			   "Apellido2": datos.Apellido2,
-			    			   "Clase": datos.Clase,
-			    			   "EmailProfesor": datos.EmailProfesor
+			    photo: (datos.foto1_url==null)?null:Titanium.Filesystem.getFile($.imgAlumno.image),
+			    custom_fields:{"Madre":$.txtMadre.value, 
+			    			   "Padre":$.txtPadre.value,
+			    			   "Direccion": $.txtDireccion.value,
+			    			   "CodPostal": $.txtCodPostal.value,
+			    			   "Telefono1":$.txtTelefono.value,
+			    			   "Telefono2": $.txtTelefono2.value,
+			    			   "Email2": $.txtEmail.value,
+			    			   "Apellido2": $.txtApellido2.value,
+			    			   "Clase": $.txtClase.value,
+			    			   "EmailProfesor": $.txtEmailProf.value
 			    			   }
 			    }, function (e) {
 		            if (e.success) {
@@ -260,17 +260,16 @@ function EnviarDatos(){
 					        alert('Error:\n' +
 					            ((e.error && e.message) || JSON.stringify(e)));
 					    }
+					    //Realizamos la solicitud al profesor para que pueda añadir al alumno a su dispositivo	
+						Cloud.Friends.add({ user_ids: profesor}, function(e) {
+								        if (e.success) {
+									        alert('La solicitud se ha enviado al profesor.');
+								        } else {
+									        alert('La solicitud ha fallado.');
+								        }
+					        });
 					});
-				//Realizamos la solicitud al profesor para que pueda añadir al alumno a su dispositivo	
-				Cloud.Friends.add({
-				user_ids: profesor
-			}, function(e) {
-		        if (e.success) {
-			        alert('La solicitud se ha enviado al profesor.');
-		        } else {
-			        alert('La solicitud ha fallado.');
-		        }
-	        });
+				
 				}
 			} );
 	}
