@@ -79,13 +79,15 @@ function GuardarAlumno(){
        
         coleccionAlumnos.add(alumno);
         alumno.save();
-        coleccionAlumnos.fetch();    
+        coleccionAlumnos.fetch(); 
+        $.btnEnviar.visible = true;   
         var dialog1 = Ti.UI.createAlertDialog({
             title: 'El alumno se ha creado correctamente.',
             style: Ti.UI.iPhone.AlertDialogStyle.DEFAULT,
             buttonNames: ['Aceptar'],
              });
             dialog1.show(); 
+            
     }else{
     //Al venir idAlumno con un valor quiere decir que es una actualizacion
         var modelActual = coleccionAlumnos.get(data.IdAlumno);
