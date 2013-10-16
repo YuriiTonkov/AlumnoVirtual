@@ -21,6 +21,8 @@ function Controller() {
             coleccionAlumnos.add(alumno);
             alumno.save();
             coleccionAlumnos.fetch();
+            $.btnEnviar.visible = true;
+            data.IdAlumno = alumno.IdAlumno;
             var dialog1 = Ti.UI.createAlertDialog({
                 title: "El alumno se ha creado correctamente.",
                 style: Ti.UI.iPhone.AlertDialogStyle.DEFAULT,
@@ -111,32 +113,41 @@ function Controller() {
         });
     }
     function EnviarDatos() {
-        true == datos.UsuarioCloud ? Cloud.Users.login({
-            login: datos.Email,
-            password: "AlumnoVirtual"
-        }, function(e) {
-            e.success ? Ti.API.info("Logged in user, id = " + e.users[0].id + ", session ID = " + Cloud.sessionId) : Ti.API.info("Login failed.");
-        }) : consultarDatos(datos.EmailProfesor, "", function(callbackEmail, callbackProf) {
+        var alu = Alloy.Collections.Alumno;
+        alu.fetch();
+        var model = alu.get(data.IdAlumno);
+        var datos2 = model.toJSON();
+        true == datos2.UsuarioCloud ? consultarDatos(datos.EmailProfesor, "", function(callbackEmail, callbackProf) {
+            var profe = callbackProf;
+            "" == profe ? alert("El Mail de profesor no aparece en nuestra Base de Datos. Compruebe los datos") : Cloud.Friends.add({
+                user_ids: profe
+            }, function(e) {
+                if (e.success) {
+                    alert("La solicitud se ha enviado al profesor.");
+                    $.btnEnviar.visible = false;
+                } else alert("La solicitud ha fallado.");
+            });
+        }) : consultarDatos(datos2.EmailProfesor, "", function(callbackEmail, callbackProf) {
             var profesor = callbackProf;
             "" == profesor ? alert("El Mail de profesor no aparece en nuestra Base de Datos. Compruebe los datos") : Cloud.Users.create({
-                email: datos.Email,
-                first_name: datos.Nombre,
-                last_name: datos.Apellido1,
+                email: datos2.Email,
+                first_name: datos2.Nombre,
+                last_name: datos2.Apellido1,
                 password: "AlumnoVirtual",
                 password_confirmation: "AlumnoVirtual",
                 role: "Alumno",
-                photo: null == datos.foto1_url ? null : Titanium.Filesystem.getFile(datos.foto1_url),
+                photo: null == datos2.foto1_url ? null : Titanium.Filesystem.getFile(datos2.foto1_url),
                 custom_fields: {
-                    Madre: datos.Madre,
-                    Padre: datos.Padre,
-                    Direccion: datos.Direccion,
-                    CodPostal: datos.CodPostal,
-                    Telefono1: datos.Telefono1,
-                    Telefono2: datos.Telefono2,
-                    Email2: datos.Email2,
-                    Apellido2: datos.Apellido2,
-                    Clase: datos.Clase,
-                    EmailProfesor: datos.EmailProfesor
+                    Madre: datos2.Madre,
+                    Padre: datos2.Padre,
+                    Direccion: datos2.Direccion,
+                    CodPostal: datos2.CodPostal,
+                    Telefono1: datos2.Telefono1,
+                    Telefono2: datos2.Telefono2,
+                    Email2: datos2.Email2,
+                    Apellido2: datos2.Apellido2,
+                    Clase: datos2.Clase,
+                    EmailProfesor: datos2.EmailProfesor
                 }
             }, function(e) {
                 if (e.success) {
@@ -579,15 +590,22 @@ function Controller() {
             $.imgAlumno.image = datos.foto1_url;
             $.imgAlumno.visible = true;
         }
-        if (true == datos.UsuarioCloud) {
-            Cloud.Users.login({
-                login: datos.Email,
-                password: "AlumnoVirtual"
-            }, function(e) {
-                e.success ? Ti.API.info("Logged in user, id = " + e.users[0].id + ", session ID = " + Cloud.sessionId) : Ti.API.info("Login failed.");
+        true == datos.UsuarioCloud && Cloud.Users.login({
+            login: datos.Email,
+            password: "AlumnoVirtual"
+        }, function(e) {
+            e.success ? Ti.API.info("Logged in user, id = " + e.users[0].id + ", session ID = " + Cloud.sessionId) : Ti.API.info("Login failed.");
+            Cloud.Friends.search({
+                user_id: e.users[0].id
+            }, function(y) {
+                if (y.success) $.btnEnviar.visible = 0 == y.users.length ? true : false; else {
+                    table.setData([ {
+                        title: y.error && y.message || y
+                    } ]);
+                    error(y);
+                }
             });
-            $.btnEnviar.visible = false;
-        }
+        });
     }
     $.winNuevoAlumno.addEventListener("close", function() {
         Cloud.Users.logout(function(e) {

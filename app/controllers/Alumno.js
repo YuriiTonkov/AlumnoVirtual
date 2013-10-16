@@ -49,8 +49,26 @@ if (data.IdAlumno == undefined){
 		    		} else {
 		        		Ti.API.info("Login failed.");
 		    		}
-				});
-		$.btnEnviar.visible=false;
+				
+		//Vamos a ver si tiene profesor asociado o no...
+		Cloud.Friends.search({
+	        user_id: e.users[0].id
+        }, function (y) {
+	        if (y.success) {
+		        if (y.users.length == 0) {
+			       $.btnEnviar.visible=true;
+		        } else {
+			       $.btnEnviar.visible=false;
+		        }
+	        }
+	        else {
+		        table.setData([
+			        { title: (y.error && y.message) || y }
+		        ]);
+		        error(y);
+	        }
+        });
+		});
 		}	
     }
 
@@ -80,7 +98,8 @@ function GuardarAlumno(){
         coleccionAlumnos.add(alumno);
         alumno.save();
         coleccionAlumnos.fetch(); 
-        $.btnEnviar.visible = true;   
+        $.btnEnviar.visible = true;
+        data.IdAlumno = alumno.IdAlumno;   
         var dialog1 = Ti.UI.createAlertDialog({
             title: 'El alumno se ha creado correctamente.',
             style: Ti.UI.iPhone.AlertDialogStyle.DEFAULT,
@@ -194,28 +213,37 @@ function consultarDatos(emailProfesorParam,profesorParam,callback){
 			
 }
 function EnviarDatos(){
-	
+	var alu = Alloy.Collections.Alumno;
+	alu.fetch();
+	var model = alu.get(data.IdAlumno);
+    var datos2 = model.toJSON();
 	//Primero habrá que loguearse en el ACS o si no se tiene usuario, crear uno.
 	//Si se tiene creado el usuario estará indicado en la BD.
-	if (datos.UsuarioCloud==true){
+	if (datos2.UsuarioCloud==true){
 		//Ya tiene usuario en la nube
-				Cloud.Users.login({ 
-		    	login: datos.Email,
-		    	password: "AlumnoVirtual"
-				}, function(e) {
-		    		if (e.success) {
-		        		Ti.API.info("Logged in user, id = " + e.users[0].id + ", session ID = " + Cloud.sessionId);
-		    		} else {
-		        		Ti.API.info("Login failed.");
-		    		}
-				});
+		consultarDatos(datos.EmailProfesor, "",function(callbackEmail, callbackProf){
+		var profe = callbackProf;
+		if (profe == ''){
+				alert('El Mail de profesor no aparece en nuestra Base de Datos. Compruebe los datos');
+		}else{
+				Cloud.Friends.add({ user_ids: profe}, function(e) {
+								        if (e.success) {
+									        alert('La solicitud se ha enviado al profesor.');
+									        $.btnEnviar.visible=false;
+								        } else {
+									        alert('La solicitud ha fallado.');
+								        }
+					        });
+			}
+	});
+	
 	}
 	else{
 		//Aun no tiene usuario, procedemos a crearlo
 		//Primero comprobamos que existe el mail del profesor que ha introducido.
 		
 		
-		consultarDatos(datos.EmailProfesor, "",function(callbackEmail, callbackProf){
+		consultarDatos(datos2.EmailProfesor, "",function(callbackEmail, callbackProf){
 				var profesor = callbackProf;
 		
 		
@@ -224,23 +252,23 @@ function EnviarDatos(){
 				alert('El Mail de profesor no aparece en nuestra Base de Datos. Compruebe los datos');
 			}else{
 						Cloud.Users.create({
-						    email: datos.Email,
-						    first_name: datos.Nombre,
-						    last_name: datos.Apellido1,
+						    email: datos2.Email,
+						    first_name: datos2.Nombre,
+						    last_name: datos2.Apellido1,
 						    password: 'AlumnoVirtual',
 						    password_confirmation: 'AlumnoVirtual',
 						    role: 'Alumno',
-						   	photo: (datos.foto1_url==null)?null:Titanium.Filesystem.getFile(datos.foto1_url),
-						    custom_fields:{"Madre":datos.Madre, 
-						    			   "Padre":datos.Padre,
-						    			   "Direccion": datos.Direccion,
-						    			   "CodPostal": datos.CodPostal,
-						    			   "Telefono1": datos.Telefono1,
-						    			   "Telefono2": datos.Telefono2,
-						    			   "Email2": datos.Email2,
-						    			   "Apellido2": datos.Apellido2,
-						    			   "Clase": datos.Clase,
-						    			   "EmailProfesor": datos.EmailProfesor
+						   	photo: (datos2.foto1_url==null)?null:Titanium.Filesystem.getFile(datos2.foto1_url),
+						    custom_fields:{"Madre":datos2.Madre, 
+						    			   "Padre":datos2.Padre,
+						    			   "Direccion": datos2.Direccion,
+						    			   "CodPostal": datos2.CodPostal,
+						    			   "Telefono1": datos2.Telefono1,
+						    			   "Telefono2": datos2.Telefono2,
+						    			   "Email2": datos2.Email2,
+						    			   "Apellido2": datos2.Apellido2,
+						    			   "Clase": datos2.Clase,
+						    			   "EmailProfesor": datos2.EmailProfesor
 						    			   }
 					}, function (e) {
 					    if (e.success) {
