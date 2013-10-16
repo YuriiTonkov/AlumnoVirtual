@@ -1,35 +1,59 @@
 <Alloy>
 	<Window id="winNuevoAlumno" class="container">
-		<ScrollView id="scrollView" top="15%" showVerticalScrollIndicator="true" showHorizontalScrollIndicator="false" height="85%" width="100%"  >
-		   <View id="viewAlumno" >
-			 	<Label class="labelAlumno" top ="0dp" >Nombre </Label>
-				<TextField top ="15dp"  class="textboxAlumno" id="txtNombre" editable="false" ></TextField>
-				<Label class="labelAlumno" top ="45dp">1er Apellido </Label>
-				<TextField class="textboxAlumno" top ="60dp" id="txtApellido1"  editable="false"></TextField>
-				<Label class="labelAlumno" top ="90dp">2o Apellido </Label>
-				<TextField class="textboxAlumno" top ="105dp" id="txtApellido2"  editable="false"></TextField>
-				<Label class="labelAlumno" top ="135dp">Direccion </Label>
-				<TextField class="textboxAlumno" top ="150dp" id="txtDireccion"  editable="false"></TextField>
-				<Label class="labelAlumno" top ="180dp">Cod.Postal </Label>
-				<TextField class="textboxAlumno" top ="195dp" id="txtCodPostal" editable="false"></TextField>
-				<Label class="labelAlumno" top ="225dp">Telefono </Label>
-				<TextField class="textboxAlumno" top ="240dp" id="txtTelefono" editable="false"></TextField>
-				<Label class="labelAlumno" top ="270dp">Telefono2 </Label>
-				<TextField class="textboxAlumno" top ="285dp" id="txtTelefono2" editable="false"></TextField>
-				<Label class="labelAlumno" top ="315dp">Email </Label>
-				<TextField class="textboxAlumno" top ="330dp" id="txtEmail" editable="false"></TextField>
-				<Label class="labelAlumno" top ="360dp">Email2 </Label>
-				<TextField class="textboxAlumno" top ="375dp" id="txtEmail2" editable="false"></TextField>
-				<Label class="labelAlumno" top ="405dp">Nombre Padre </Label>
-				<TextField class="textboxAlumno" top ="420dp" id="txtPadre" editable="false"></TextField>
-				<Label class="labelAlumno" top ="450dp">Nombre Madre </Label>
-				<TextField class="textboxAlumno" top ="465dp" id="txtMadre" editable="false"></TextField>
-				<Label class="labelAlumno" top ="495dp">Clase</Label>
-				<TextField class="textboxAlumno" top ="510dp" id="txtClase" editable="false"></TextField>
-				<Label class="labelAlumno" top ="540dp">Email Profesor:</Label>
-				<TextField class="textboxAlumno" top ="555dp" id="txtEmailProf" editable="false"></TextField>
-			</View>
-		</ScrollView>
+		<TableView top="10%" id="Marco">
+			<TableViewRow height="40dp">
+			 	<Label class="labelAlumno">Nombre</Label>
+				<TextField class="textboxAlumno" editable="false" id="txtNombre" ></TextField>
+			</TableViewRow>
+			<TableViewRow height="40dp">
+				<Label class="labelAlumno" >1er Apellido</Label>
+				<TextField class="textboxAlumno" editable="false" id="txtApellido1"></TextField>
+			</TableViewRow>	
+			<TableViewRow height="40dp">
+				<Label class="labelAlumno" >2o Apellido</Label>
+				<TextField class="textboxAlumno" editable="false" id="txtApellido2"></TextField>
+			</TableViewRow>	
+			<TableViewRow height="40dp">
+				<Label class="labelAlumno">Direccion</Label>
+				<TextField class="textboxAlumno"  editable="false" id="txtDireccion"></TextField>
+			</TableViewRow>	
+			<TableViewRow height="40dp">
+				<Label class="labelAlumno">Cod.Postal</Label>
+				<TextField class="textboxAlumno" editable="false" id="txtCodPostal"></TextField>
+			</TableViewRow>	
+			<TableViewRow height="40dp">
+				<Label class="labelAlumno">Telefono</Label>
+				<TextField class="textboxAlumno" editable="false" id="txtTelefono"></TextField>
+			</TableViewRow>	
+			<TableViewRow height="40dp">
+				<Label class="labelAlumno">Telefono2</Label>
+				<TextField class="textboxAlumno"editable="false" id="txtTelefono2"></TextField>
+			</TableViewRow>	
+			<TableViewRow height="40dp">
+				<Label class="labelAlumno">Email</Label>
+				<TextField class="textboxAlumno" editable="false"  id="txtEmail"></TextField>
+			</TableViewRow>	
+			<TableViewRow height="40dp">
+				<Label class="labelAlumno">Email2</Label>
+				<TextField class="textboxAlumno" editable="false" id="txtEmail2"></TextField>
+			</TableViewRow>	
+			<TableViewRow height="40dp">
+				<Label class="labelAlumno">Nombre Padre</Label>
+				<TextField class="textboxAlumno" editable="false" id="txtPadre"></TextField>
+			</TableViewRow>	
+			<TableViewRow height="40dp">
+				<Label class="labelAlumno">Nombre Madre</Label>
+				<TextField class="textboxAlumno" editable="false" id="txtMadre"></TextField>
+			</TableViewRow>
+			<TableViewRow height="40dp">
+				<Label class="labelAlumno">Email Profesor</Label>
+				<TextField class="textboxAlumno" editable="false" id="txtEmailProf"></TextField>
+			</TableViewRow>
+			<TableViewRow height="40dp">
+				<Label class="labelAlumno">Clase</Label>
+				<TextField class="textboxAlumno" editable="false" id="txtClase"></TextField>
+			</TableViewRow>
+		</TableView>
 		<ImageView  left="10%" id="imgAlumno" height="15%" width="16%" top="2%" onClick="sacarFoto"></ImageView>
 		<Button class="button" top="2%" borderRadius="5dp" left="40%" height="25dp" width="80dp" onClick="EnviarDatos" id="btnEnviar" title="Enviar"></Button>
 		<Button class="button" top="-50dp" id="btnGuardar" title="Guardar" onClick="GuardarAlumno"></Button>

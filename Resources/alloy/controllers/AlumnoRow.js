@@ -20,6 +20,10 @@ function Controller() {
         height: "40dp",
         textAlign: "left",
         left: "10dp",
+        font: {
+            fontSize: 16,
+            fontFamily: "HelveticaNeue-UltraLight"
+        },
         id: "lblAlumno",
         text: "undefined" != typeof $model.__transform["nombrecompleto"] ? $model.__transform["nombrecompleto"] : $model.get("nombrecompleto"),
         textid: "undefined" != typeof $model.__transform["IdAlumno"] ? $model.__transform["IdAlumno"] : $model.get("IdAlumno")
@@ -36,7 +40,7 @@ function Controller() {
             });
             Alloy.Globals.GrupoTab.activeTab.open(tabAlumnosController.getView());
         } else {
-            var tabAsignaturasController = Alloy.createController("WinAsignaturas", {
+            var tabAsignaturasController = Alloy.createController("WinOpciones", {
                 IdAlumno: e.source.textid,
                 Nombre: e.source.text
             });

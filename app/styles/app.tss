@@ -1,7 +1,14 @@
-//Estilo redondeado para todas las tablas de la aplicacion
+//Estilo de todas las ventanas. se le quita al titulo la propiedad traslucida y se le pone el mismo fondo de color de la aplicacion
+"Window": {
+	"barColor":"#e7effa", 
+	"translucent": "false",
+  	backgroundColor : "EEE"
+	}
+
+//Estilo agrupado para todas las tablas de la aplicacion
 "TableView": {
-  style : Ti.UI.iPhone.TableViewStyle.GROUPED,
-  backgroundColor : "transparent"}
+  style : Ti.UI.iPhone.TableViewStyle.GROUPED
+}
  
 //Todas las filas de las tablas llevan de fondo color blanco  
 "TableViewRow":{
@@ -14,9 +21,9 @@
 	"width": "100%",
 	"height": "40dp",
 	"textAlign": "left",
-	"left": "10dp"
+	"left": "10dp", 
+   "font": {fontSize:16, fontFamily:'HelveticaNeue-UltraLight'}
 }
-
 //Estilo de los titulos de las filas de la tabla de Cursos.
 "#lblCurso":{
     width: Ti.UI.FILL,
@@ -25,12 +32,20 @@
     "top": "-6dp"		
 } 
 
+"#lblClases":{
+    width: Ti.UI.FILL,
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    "left": "10dp",
+    "top": "-6dp"		
+} 
+
+
 //Estilo de los subtitulos de las filas de las tablas
 ".rowSubTitle": {
 	"width": "100%",
 	"height": "10dp",
-	"top":"26dp",
-	"font": {fontSize:10,fontFamily:'HelveticaNeue'},
+	"top":"33dp",
+	"font": {fontSize:10,fontFamily:'HelveticaNeue-UltraLight'},
 	"textAlign": "left",
 	"left": "10dp"
 }
@@ -42,17 +57,9 @@
 }
 
 
-//Pendiente de cambiar el fondo en funcion del telefono en el controlador...
-".mainWindow[platform=ios formFactor=max-height:480dp]" : {
-backgroundImage : "library/images/iphone/backGround320x480Base.png"
-}
-".mainWindow[platform=ios formFactor=max-height:568dp]" : {
-backgroundImage : "library/images/iphone/backGround640x1136Base.png"
-}
-
 //Estilo para los scrollview
-".ScrollView":{
-	backgroundColor : "transparent"
+"#scrollViewAlumno":{
+	backgroundColor : "EEE"
 }
 
 "#viewAlumno":{
@@ -66,21 +73,21 @@ backgroundImage : "library/images/iphone/backGround640x1136Base.png"
 //Estilo de las label de la ventana NuevoAlumno
 ".labelAlumno": {
 	"width": "100%",
-	"height": "16dp",
+	"height": "12dp",
 	"textAlign": "left",
 	"left": "6dp",
-	"top": "20dp",
-	"font": {fontSize:10,fontFamily:'HelveticaNeue'}
+	"top": "1dp",
+	"font": {fontSize:10,fontFamily:'HelveticaNeue-UltraLight'}
 }
 
 //Estilo de las cajas de texto de la ventana NuevoAlumno
 ".textboxAlumno": {
-	"borderRadius":"3dp",
-	"backgroundColor": "EEE",
-	"width": "94%",
-	"height": "24dp",
+	"top":"15dp",
+	"width": "100%",
+	"height": "20dp",
 	"textAlign": "left",
-	"left": "7dp"
+	"left": "45dp",
+	"font": {fontSize:16, fontFamily:'HelveticaNeue-UltraLight'}
 }
 
 

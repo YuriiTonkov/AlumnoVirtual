@@ -12,25 +12,24 @@ function Controller() {
     Alloy.Collections.instance("Notificacion");
     Alloy.Collections.instance("Tipo_Notificacion");
     $.__views.GrupoTab = Ti.UI.createTabGroup({
-        backgroundImage: "library/images/iphone/backGround640x1136Base.png",
         id: "GrupoTab"
     });
-    $.__views.__alloyId37 = Alloy.createController("TabPrincipal", {
-        id: "__alloyId37"
+    $.__views.__alloyId61 = Alloy.createController("TabPrincipal", {
+        id: "__alloyId61"
     });
-    $.__views.GrupoTab.addTab($.__views.__alloyId37.getViewEx({
+    $.__views.GrupoTab.addTab($.__views.__alloyId61.getViewEx({
         recurse: true
     }));
-    $.__views.__alloyId39 = Alloy.createController("TabCalendario", {
-        id: "__alloyId39"
+    $.__views.__alloyId63 = Alloy.createController("TabCalendario", {
+        id: "__alloyId63"
     });
-    $.__views.GrupoTab.addTab($.__views.__alloyId39.getViewEx({
+    $.__views.GrupoTab.addTab($.__views.__alloyId63.getViewEx({
         recurse: true
     }));
-    $.__views.__alloyId41 = Alloy.createController("TabConfiguracion", {
-        id: "__alloyId41"
+    $.__views.__alloyId65 = Alloy.createController("TabConfiguracion", {
+        id: "__alloyId65"
     });
-    $.__views.GrupoTab.addTab($.__views.__alloyId41.getViewEx({
+    $.__views.GrupoTab.addTab($.__views.__alloyId65.getViewEx({
         recurse: true
     }));
     $.__views.GrupoTab && $.addTopLevelView($.__views.GrupoTab);

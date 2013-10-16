@@ -1,0 +1,18 @@
+<Alloy>
+	<Window id="WinOpciones" class="Window">
+		<TableView top="10%" id="Marco">
+			<TableViewRow height="50dp">
+			 	<Label class="rowTitle">Notas</Label>
+				<Label class="rowSubTitle">Notas entregadas por el profesor</Label>
+			</TableViewRow>
+			<TableViewRow height="50dp">
+			 	<Label class="rowTitle">Avisos</Label>
+				<Label class="rowSubTitle">Avisos del profesor</Label>
+			</TableViewRow>
+			<TableViewRow height="50dp">
+			 	<Label class="rowTitle">Apuntes</Label>
+				<Label class="rowSubTitle">Enlaces a apuntes de asignaturas</Label>
+			</TableViewRow>
+		</TableView>
+	</Window>
+</Alloy>

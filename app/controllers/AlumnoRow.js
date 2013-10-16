@@ -7,7 +7,7 @@ $.tblAlumnoRow.addEventListener("click", function(e){
         Alloy.Globals.GrupoTab.activeTab.open(tabAlumnosController.getView());
     }
     else{
-    var tabAsignaturasController = Alloy.createController("WinAsignaturas", {"IdAlumno":e.source.textid, "Nombre":e.source.text});
+    var tabAsignaturasController = Alloy.createController("WinOpciones", {"IdAlumno":e.source.textid, "Nombre":e.source.text});
     Alloy.Globals.GrupoTab.activeTab.open(tabAsignaturasController.getView());
     }
     
