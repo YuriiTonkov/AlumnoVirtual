@@ -1,0 +1,6 @@
+<Alloy>
+	<Window class="container">
+		<TableView id="TabAvisos">
+		</TableView>>
+	</Window>
+</Alloy>
