@@ -1,18 +1,7 @@
 <Alloy>
-	<Window id="WinOpciones" class="Window">
-		<TableView top="10%" id="Marco">
-			<TableViewRow id="rowNotas" height="50dp">
-			 	<Label class="rowTitle">Notas</Label>
-				<Label class="rowSubTitle">Notas entregadas por el profesor</Label>
-			</TableViewRow>
-			<TableViewRow id="rowAvisos" height="50dp">
-			 	<Label class="rowTitle">Avisos</Label>
-				<Label class="rowSubTitle">Avisos del profesor</Label>
-			</TableViewRow>
-			<TableViewRow id="rowApuntes" height="50dp">
-			 	<Label class="rowTitle">Apuntes</Label>
-				<Label class="rowSubTitle">Enlaces a apuntes de asignaturas</Label>
-			</TableViewRow>
+	<Window id="WinOpciones" class="container">
+		<TableView dataCollection="TipoNotificacion"  id="Marco">
+			<Require src="OpcionRow"/>
 		</TableView>
 	</Window>
 </Alloy>

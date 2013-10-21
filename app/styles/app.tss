@@ -2,12 +2,15 @@
 "Window": {
 	"barColor":"#e7effa", 
 	"translucent": "false",
-  	backgroundColor : "EEE"
+  	backgroundColor : "e2effa"
 	}
+	
 
 //Estilo agrupado para todas las tablas de la aplicacion
 "TableView": {
-  style : Ti.UI.iPhone.TableViewStyle.GROUPED
+  style : Ti.UI.iPhone.TableViewStyle.GROUPED,
+  backgroundImage: "backGround320x416Base.png", //Elimina el efecto del traslucido de las ventanas
+  top: "0dp"
 }
  
 //Todas las filas de las tablas llevan de fondo color blanco  
@@ -21,22 +24,23 @@
 	"width": "100%",
 	"height": "40dp",
 	"textAlign": "left",
-	"left": "10dp", 
+	"left": "16dp", 
    "font": {fontSize:16, fontFamily:'HelveticaNeue-UltraLight'}
 }
 //Estilo de los titulos de las filas de la tabla de Cursos.
 "#lblCurso":{
     width: Ti.UI.FILL,
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-    "left": "10dp",
-    "top": "-6dp"		
+    "left": "16dp",
+    "top": "-7dp"		
 } 
+
 
 "#lblClases":{
     width: Ti.UI.FILL,
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-    "left": "10dp",
-    "top": "-6dp"		
+    "left": "16dp",
+    "top": "-7dp"		
 } 
 
 
@@ -44,10 +48,10 @@
 ".rowSubTitle": {
 	"width": "100%",
 	"height": "10dp",
-	"top":"33dp",
-	"font": {fontSize:10,fontFamily:'HelveticaNeue-UltraLight'},
+	"top":"26dp",
+	"font": {fontSize:12,fontFamily:'HelveticaNeue-UltraLight'},
 	"textAlign": "left",
-	"left": "10dp"
+	"left": "16dp"
 }
 
 "#imageLblCurso": {
@@ -57,10 +61,6 @@
 }
 
 
-//Estilo para los scrollview
-"#scrollViewAlumno":{
-	backgroundColor : "EEE"
-}
 
 "#viewAlumno":{
 	backgroundColor : "white",
@@ -90,4 +90,11 @@
 	"font": {fontSize:16, fontFamily:'HelveticaNeue-UltraLight'}
 }
 
-
+".detalle": {
+	"width": "10%",
+	"height": "10dp",
+	"top":"26dp",
+	"font": {fontSize:12,fontFamily:'HelveticaNeue-UltraLight'},
+	"textAlign": "right",
+	"right": "16dp"
+}

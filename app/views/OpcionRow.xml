@@ -1,0 +1,7 @@
+<Alloy>
+	<TableViewRow   data="{IdTipoNotificacion}" id="tblOpcionRow" >
+		<Label class="rowTitle" id="lblTitulo" text="{Nombre}" textid="{IdTipoNotificacion}"/>
+		<Label class="rowSubTitle" id="lblDescripcion" text="{Descripcion}" textid="{IdTipoNotificacion}"/>
+		<Label class="detalle" text="1" id="lblDetalle"/>
+	</TableViewRow>
+</Alloy>

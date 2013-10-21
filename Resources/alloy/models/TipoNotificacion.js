@@ -26,9 +26,9 @@ exports.definition = {
 
 var Alloy = require("alloy"), _ = require("alloy/underscore")._, model, collection;
 
-model = Alloy.M("Tipo_Notificacion", exports.definition, []);
+model = Alloy.M("TipoNotificacion", exports.definition, []);
 
-collection = Alloy.C("Tipo_Notificacion", exports.definition, model);
+collection = Alloy.C("TipoNotificacion", exports.definition, model);
 
 exports.Model = model;
 

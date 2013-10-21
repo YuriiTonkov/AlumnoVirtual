@@ -2,12 +2,24 @@ var arg1 = arguments[0] || {};
 var data = [];
 data = arg1;
 
+
+
+
+
+
 //Elementos de Interfaz
 $.WinOpciones.title = data.Nombre;
 //$.WinAlumnos.setRightNavButton($.addAlumno);
 var alumno = Alloy.Collections.Alumno;
 var model = alumno.get(data.IdAlumno);
 var datos = model.toJSON();
+
+var opcion = Alloy.Collections.TipoNotificacion;
+opcion.fetch();
+
+
+
+//Sincronizacion con la información en la NUBE.
         
 if (datos.UsuarioCloud==true){
 		//Ya tiene usuario en la nube
@@ -17,23 +29,84 @@ if (datos.UsuarioCloud==true){
 				}, function(e) {
 		    		if (e.success) {
 		        		Ti.API.info("Logged in user, id = " + e.users[0].id + ", session ID = " + Cloud.sessionId);
+		        		//Ahora vamos a proceder a descargarnos toda la información de mensajes existente.
+						  Cloud.Messages.showInbox(function (u) {
+				            if (u.success) {
+					            if (u.messages.length == 0) {
+				                    alert('No hay mensajes' );
+				                   
+				                } else {
+					                var data = [];
+					                
+						            for (var i = 0, l = u.messages.length; i < l; i++) {
+				              	        //Por cada uno de los mensajes los descargaremos en la BD de la aplicación
+				              	        var message = u.messages[i];
+				                        Cloud.Messages.show({message_id: message.id
+										    	}, function (p) {
+											    if (p.success) {
+											    	//Aqui se hace la insercción de la notificacion en la tabla segun el tipo que sea.
+											    	var mensaje = p.messages[0];
+											    	var model = Alloy.createModel('Notificacion',{
+													    "Tipo": mensaje.custom_fields.IdTipo,
+													    "Titulo": mensaje.subject,
+													    "Texto": mensaje.body,
+													    "Alumno": data.IdAlumno,
+													    "Asignatura": mensaje.custom_fields.Asignatura,
+													    "Nota": mensaje.custom_fields.Nota, 
+													    "Leida": false});
+											    	var Notificaciones = Alloy.Collections.Notificacion;
+										            Notificaciones.add(model);
+										            model.save();
+										            Notificaciones.fetch();
+																					    	
+											    	//Una vez se ha terminado la insercción se borra de la nube
+											    	Cloud.Messages.remove({
+													            message_id: mensaje.id
+													        }, function (e) {
+													            if (e.success) {
+													                
+													            } else {
+													                alert('No se ha actualizado la información online' +e.message);
+													            }
+													        });
+											    	
+											    } else {
+											    	alert("Error de sincronizacion"+p.message);
+												}
+												
+										});
+				                    }
+						             
+					            }
+				            } else {
+								alert("Error de sincronizacion"+  u.message);
+				            }
+				        });
+		        		
 		    		} else {
-		        		Ti.API.info("Login failed.");
+		        		alert("Login failed.");
 		    		}
 		    	
 		    	});
 		    }
+		    	    
+
+
+
+
+
+
+
+
+
+
 //Listener------------------------------------------------------------------------------------
 
-$.rowAvisos.addEventListener('click', function() {
-    var tabOpcionesController = Alloy.createController("WinAvisos", {});
-    Alloy.Globals.GrupoTab.activeTab.open(tabOpcionesController.getView());
-});
 
 $.WinOpciones.addEventListener('close', function() {
     Cloud.Users.logout(function (e) {
         if (e.success) {
-            
+           $.destroy(); 
         }
         else {
         	alert('Error:\n' +

@@ -1,0 +1,14 @@
+<Alloy>
+	<Window id="winVerAviso" class="container">
+		<TableView id="Marco">
+			<TableViewRow height="40dp">
+			 	<Label class="labelAlumno">Asunto</Label>
+				<TextField class="textboxAlumno" editable="false" id="txtSubject" ></TextField>
+			</TableViewRow>
+			<TableViewRow height="100dp">
+			 	<Label class="labelAlumno">Cuerpo</Label>
+				<TextField class="textboxAlumno" editable="false" id="txtContent" ></TextField>
+			</TableViewRow>
+		</TableView>
+	<Window>
+</Alloy>

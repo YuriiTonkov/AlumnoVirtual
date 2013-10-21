@@ -10,26 +10,26 @@ function Controller() {
     Alloy.Collections.instance("Alumno_Asignatura");
     Alloy.Collections.instance("Asignatura");
     Alloy.Collections.instance("Notificacion");
-    Alloy.Collections.instance("Tipo_Notificacion");
+    Alloy.Collections.instance("TipoNotificacion");
     $.__views.GrupoTab = Ti.UI.createTabGroup({
         id: "GrupoTab"
     });
-    $.__views.__alloyId58 = Alloy.createController("TabPrincipal", {
-        id: "__alloyId58"
-    });
-    $.__views.GrupoTab.addTab($.__views.__alloyId58.getViewEx({
-        recurse: true
-    }));
-    $.__views.__alloyId60 = Alloy.createController("TabCalendario", {
-        id: "__alloyId60"
-    });
-    $.__views.GrupoTab.addTab($.__views.__alloyId60.getViewEx({
-        recurse: true
-    }));
-    $.__views.__alloyId62 = Alloy.createController("TabConfiguracion", {
+    $.__views.__alloyId62 = Alloy.createController("TabPrincipal", {
         id: "__alloyId62"
     });
     $.__views.GrupoTab.addTab($.__views.__alloyId62.getViewEx({
+        recurse: true
+    }));
+    $.__views.__alloyId64 = Alloy.createController("TabCalendario", {
+        id: "__alloyId64"
+    });
+    $.__views.GrupoTab.addTab($.__views.__alloyId64.getViewEx({
+        recurse: true
+    }));
+    $.__views.__alloyId66 = Alloy.createController("TabConfiguracion", {
+        id: "__alloyId66"
+    });
+    $.__views.GrupoTab.addTab($.__views.__alloyId66.getViewEx({
         recurse: true
     }));
     $.__views.GrupoTab && $.addTopLevelView($.__views.GrupoTab);

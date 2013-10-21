@@ -163,10 +163,6 @@ function GuardarAlumno(){
             buttonNames: ['Aceptar'],
              });
             dialog2.show();
-    
-    
-    
-    
 		}
 	}
 

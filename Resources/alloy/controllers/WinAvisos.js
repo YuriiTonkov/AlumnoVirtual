@@ -9,33 +9,40 @@ function Controller() {
     $.__views.WinAvisos = Ti.UI.createWindow({
         barColor: "#e7effa",
         translucent: "false",
-        backgroundColor: "EEE",
+        backgroundColor: "e2effa",
         id: "WinAvisos"
     });
     $.__views.WinAvisos && $.addTopLevelView($.__views.WinAvisos);
     $.__views.TabAvisos = Ti.UI.createTableView({
         style: Ti.UI.iPhone.TableViewStyle.GROUPED,
+        backgroundImage: "backGround320x416Base.png",
+        top: "0dp",
         id: "TabAvisos"
     });
     $.__views.WinAvisos.add($.__views.TabAvisos);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var table = $.TabAvisos;
     Cloud.Messages.showInbox(function(e) {
-        if (e.success) if (0 == e.messages.length) table.setData([ {
+        if (e.success) if (0 == e.messages.length) $.TabAvisos.setData([ {
             title: "No hay mensajes"
         } ]); else {
             var data = [];
             for (var i = 0, l = e.messages.length; l > i; i++) {
                 var message = e.messages[i];
                 var row = Ti.UI.createTableViewRow({
-                    title: message.subject,
-                    id: message.id
+                    id: message.id,
+                    title: message.subject
+                });
+                row.addEventListener("click", function() {
+                    var tabAsignaturasController = Alloy.createController("VerAviso", {
+                        IdAviso: message.id
+                    });
+                    Alloy.Globals.GrupoTab.activeTab.open(tabAsignaturasController.getView());
                 });
                 data.push(row);
             }
-            table.setData(data);
-        } else table.setData([ {
+            $.TabAvisos.setData(data);
+        } else $.TabAvisos.setData([ {
             title: e.error && e.message || e
         } ]);
     });

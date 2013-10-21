@@ -179,7 +179,7 @@ function Controller() {
     $.__views.winNuevoAlumno = Ti.UI.createWindow({
         barColor: "#e7effa",
         translucent: "false",
-        backgroundColor: "EEE",
+        backgroundColor: "e2effa",
         id: "winNuevoAlumno"
     });
     $.__views.winNuevoAlumno && $.addTopLevelView($.__views.winNuevoAlumno);
@@ -628,8 +628,9 @@ function Controller() {
     $.__views.__alloyId25.add($.__views.txtClase);
     $.__views.Marco = Ti.UI.createTableView({
         style: Ti.UI.iPhone.TableViewStyle.GROUPED,
-        data: __alloyId1,
+        backgroundImage: "backGround320x416Base.png",
         top: "10%",
+        data: __alloyId1,
         id: "Marco"
     });
     $.__views.winNuevoAlumno.add($.__views.Marco);

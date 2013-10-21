@@ -1,16 +1,16 @@
 function Controller() {
-    function __alloyId34() {
-        __alloyId34.opts || {};
-        var models = __alloyId33.models;
+    function __alloyId40() {
+        __alloyId40.opts || {};
+        var models = __alloyId39.models;
         var len = models.length;
         var rows = [];
         for (var i = 0; len > i; i++) {
-            var __alloyId31 = models[i];
-            __alloyId31.__transform = nombrecompleto(__alloyId31);
-            var __alloyId32 = Alloy.createController("AlumnoRow", {
-                $model: __alloyId31
+            var __alloyId37 = models[i];
+            __alloyId37.__transform = nombrecompleto(__alloyId37);
+            var __alloyId38 = Alloy.createController("AlumnoRow", {
+                $model: __alloyId37
             });
-            rows.push(__alloyId32.getViewEx({
+            rows.push(__alloyId38.getViewEx({
                 recurse: true
             }));
         }
@@ -36,18 +36,20 @@ function Controller() {
     $.__views.WinAlumnos = Ti.UI.createWindow({
         barColor: "#e7effa",
         translucent: "false",
-        backgroundColor: "EEE",
+        backgroundColor: "e2effa",
         id: "WinAlumnos",
         title: "Alumnos"
     });
     $.__views.WinAlumnos && $.addTopLevelView($.__views.WinAlumnos);
     $.__views.TablaAlumnos = Ti.UI.createTableView({
         style: Ti.UI.iPhone.TableViewStyle.GROUPED,
+        backgroundImage: "backGround320x416Base.png",
+        top: "0dp",
         id: "TablaAlumnos"
     });
     $.__views.WinAlumnos.add($.__views.TablaAlumnos);
-    var __alloyId33 = Alloy.Collections["Alumno"] || Alumno;
-    __alloyId33.on("fetch destroy change add remove reset", __alloyId34);
+    var __alloyId39 = Alloy.Collections["Alumno"] || Alumno;
+    __alloyId39.on("fetch destroy change add remove reset", __alloyId40);
     $.__views.addAlumno = Ti.UI.createButton({
         id: "addAlumno",
         title: "Nuevo alumno",
@@ -56,7 +58,7 @@ function Controller() {
     $.__views.WinAlumnos.add($.__views.addAlumno);
     NuevoAlumno ? $.__views.addAlumno.addEventListener("click", NuevoAlumno) : __defers["$.__views.addAlumno!click!NuevoAlumno"] = true;
     exports.destroy = function() {
-        __alloyId33.off("fetch destroy change add remove reset", __alloyId34);
+        __alloyId39.off("fetch destroy change add remove reset", __alloyId40);
     };
     _.extend($, $.__views);
     $.WinAlumnos.title = "Alumnos";

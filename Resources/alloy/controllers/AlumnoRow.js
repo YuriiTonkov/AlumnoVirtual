@@ -19,7 +19,7 @@ function Controller() {
         width: "100%",
         height: "40dp",
         textAlign: "left",
-        left: "10dp",
+        left: "16dp",
         font: {
             fontSize: 16,
             fontFamily: "HelveticaNeue-UltraLight"

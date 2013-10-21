@@ -3,7 +3,7 @@
 	<Collection src="Alumno_Asignatura">
 	<Collection src="Asignatura">
 	<Collection src="Notificacion">
-	<Collection src="Tipo_Notificacion">
+	<Collection src="TipoNotificacion">
 	<TabGroup id="GrupoTab" class="mainWindow">
 		<Require src="TabPrincipal"/>
 		<Require src="TabCalendario"/>
