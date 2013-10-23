@@ -3,10 +3,6 @@ var data = [];
 data = arg1;
 
 
-
-
-
-
 //Elementos de Interfaz
 $.WinOpciones.title = data.Nombre;
 //$.WinAlumnos.setRightNavButton($.addAlumno);
@@ -14,13 +10,13 @@ var alumno = Alloy.Collections.Alumno;
 var model = alumno.get(data.IdAlumno);
 var datos = model.toJSON();
 
-var opcion = Alloy.Collections.TipoNotificacion;
-opcion.fetch();
-
-
+//var opcion = Alloy.Collections.TipoNotificacion;
+//opcion.fetch();
 
 //Sincronizacion con la información en la NUBE.
-        
+var contNotas = 0;
+var contAvisos = 0;
+var contApuntes = 0;        
 if (datos.UsuarioCloud==true){
 		//Ya tiene usuario en la nube
 				Cloud.Users.login({ 
@@ -40,12 +36,8 @@ if (datos.UsuarioCloud==true){
 					                
 						            for (var i = 0, l = u.messages.length; i < l; i++) {
 				              	        //Por cada uno de los mensajes los descargaremos en la BD de la aplicación
-				              	        var message = u.messages[i];
-				                        Cloud.Messages.show({message_id: message.id
-										    	}, function (p) {
-											    if (p.success) {
+				              	        var mensaje = u.messages[i];
 											    	//Aqui se hace la insercción de la notificacion en la tabla segun el tipo que sea.
-											    	var mensaje = p.messages[0];
 											    	var model = Alloy.createModel('Notificacion',{
 													    "Tipo": mensaje.custom_fields.IdTipo,
 													    "Titulo": mensaje.subject,
@@ -58,7 +50,18 @@ if (datos.UsuarioCloud==true){
 										            Notificaciones.add(model);
 										            model.save();
 										            Notificaciones.fetch();
-																					    	
+													
+													switch(mensaje.custom_fields.IdTipo)
+														{
+														case 1:
+														  contNotas = contNotas+1;
+														  break;
+														case 2:
+														 contAvisos= contAvisos+1;
+														  break;
+														case 3:
+														  contApuntes = contApuntes+1;
+														}								    	
 											    	//Una vez se ha terminado la insercción se borra de la nube
 											    	Cloud.Messages.remove({
 													            message_id: mensaje.id
@@ -69,12 +72,6 @@ if (datos.UsuarioCloud==true){
 													                alert('No se ha actualizado la información online' +e.message);
 													            }
 													        });
-											    	
-											    } else {
-											    	alert("Error de sincronizacion"+p.message);
-												}
-												
-										});
 				                    }
 						             
 					            }

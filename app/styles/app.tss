@@ -54,6 +54,15 @@
 	"left": "16dp"
 }
 
+".detalle": {
+	"width": "10%",
+	"height": "10dp",
+	"top":"26dp",
+	"font": {fontSize:12,fontFamily:'HelveticaNeue-UltraLight'},
+	"textAlign": "right",
+	"right": "10dp"
+}
+
 "#imageLblCurso": {
 	right: 10,
 	width: 30,

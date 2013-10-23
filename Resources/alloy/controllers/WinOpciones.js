@@ -1,18 +1,138 @@
 function Controller() {
-    function __alloyId45() {
-        __alloyId45.opts || {};
-        var models = __alloyId44.models;
+    function __alloyId64() {
+        __alloyId64.opts || {};
+        var models = __alloyId63.models;
         var len = models.length;
         var rows = [];
         for (var i = 0; len > i; i++) {
             var __alloyId42 = models[i];
             __alloyId42.__transform = {};
-            var __alloyId43 = Alloy.createController("OpcionRow", {
-                $model: __alloyId42
+            var __alloyId43 = Ti.UI.createTableViewRow({
+                backgroundColor: "white",
+                height: "40dp"
             });
-            rows.push(__alloyId43.getViewEx({
-                recurse: true
-            }));
+            rows.push(__alloyId43);
+            var __alloyId45 = Ti.UI.createLabel({
+                width: "100%",
+                height: "40dp",
+                textAlign: "left",
+                left: "16dp",
+                font: {
+                    fontSize: 16,
+                    fontFamily: "HelveticaNeue-UltraLight"
+                },
+                text: "Notas"
+            });
+            __alloyId43.add(__alloyId45);
+            var __alloyId47 = Ti.UI.createLabel({
+                width: "100%",
+                height: "10dp",
+                top: "26dp",
+                font: {
+                    fontSize: 12,
+                    fontFamily: "HelveticaNeue-UltraLight"
+                },
+                textAlign: "left",
+                left: "16dp",
+                text: "Notas de los examenes realizados"
+            });
+            __alloyId43.add(__alloyId47);
+            var __alloyId48 = Ti.UI.createLabel({
+                width: "10%",
+                height: "10dp",
+                top: "26dp",
+                font: {
+                    fontSize: 12,
+                    fontFamily: "HelveticaNeue-UltraLight"
+                },
+                textAlign: "right",
+                right: "16dp"
+            });
+            __alloyId43.add(__alloyId48);
+            var __alloyId50 = Ti.UI.createTableViewRow({
+                backgroundColor: "white",
+                height: "40dp"
+            });
+            rows.push(__alloyId50);
+            var __alloyId52 = Ti.UI.createLabel({
+                width: "100%",
+                height: "40dp",
+                textAlign: "left",
+                left: "16dp",
+                font: {
+                    fontSize: 16,
+                    fontFamily: "HelveticaNeue-UltraLight"
+                },
+                text: "Avisos"
+            });
+            __alloyId50.add(__alloyId52);
+            var __alloyId54 = Ti.UI.createLabel({
+                width: "100%",
+                height: "10dp",
+                top: "26dp",
+                font: {
+                    fontSize: 12,
+                    fontFamily: "HelveticaNeue-UltraLight"
+                },
+                textAlign: "left",
+                left: "16dp",
+                text: "Avisos del profesor"
+            });
+            __alloyId50.add(__alloyId54);
+            var __alloyId55 = Ti.UI.createLabel({
+                width: "10%",
+                height: "10dp",
+                top: "26dp",
+                font: {
+                    fontSize: 12,
+                    fontFamily: "HelveticaNeue-UltraLight"
+                },
+                textAlign: "right",
+                right: "16dp"
+            });
+            __alloyId50.add(__alloyId55);
+            var __alloyId57 = Ti.UI.createTableViewRow({
+                backgroundColor: "white",
+                height: "40dp"
+            });
+            rows.push(__alloyId57);
+            var __alloyId59 = Ti.UI.createLabel({
+                width: "100%",
+                height: "40dp",
+                textAlign: "left",
+                left: "16dp",
+                font: {
+                    fontSize: 16,
+                    fontFamily: "HelveticaNeue-UltraLight"
+                },
+                text: "Apuntes"
+            });
+            __alloyId57.add(__alloyId59);
+            var __alloyId61 = Ti.UI.createLabel({
+                width: "100%",
+                height: "10dp",
+                top: "26dp",
+                font: {
+                    fontSize: 12,
+                    fontFamily: "HelveticaNeue-UltraLight"
+                },
+                textAlign: "left",
+                left: "16dp",
+                text: "Apuntes facilitados"
+            });
+            __alloyId57.add(__alloyId61);
+            var __alloyId62 = Ti.UI.createLabel({
+                width: "10%",
+                height: "10dp",
+                top: "26dp",
+                font: {
+                    fontSize: 12,
+                    fontFamily: "HelveticaNeue-UltraLight"
+                },
+                textAlign: "right",
+                right: "16dp"
+            });
+            __alloyId57.add(__alloyId62);
         }
         $.__views.Marco.setData(rows);
     }
@@ -37,10 +157,10 @@ function Controller() {
         id: "Marco"
     });
     $.__views.WinOpciones.add($.__views.Marco);
-    var __alloyId44 = Alloy.Collections["TipoNotificacion"] || TipoNotificacion;
-    __alloyId44.on("fetch destroy change add remove reset", __alloyId45);
+    var __alloyId63 = Alloy.Collections["TipoNotificacion"] || TipoNotificacion;
+    __alloyId63.on("fetch destroy change add remove reset", __alloyId64);
     exports.destroy = function() {
-        __alloyId44.off("fetch destroy change add remove reset", __alloyId45);
+        __alloyId63.off("fetch destroy change add remove reset", __alloyId64);
     };
     _.extend($, $.__views);
     var arg1 = arguments[0] || {};
@@ -50,8 +170,6 @@ function Controller() {
     var alumno = Alloy.Collections.Alumno;
     var model = alumno.get(data.IdAlumno);
     var datos = model.toJSON();
-    var opcion = Alloy.Collections.TipoNotificacion;
-    opcion.fetch();
     true == datos.UsuarioCloud && Cloud.Users.login({
         login: datos.Email,
         password: "AlumnoVirtual"
@@ -62,31 +180,24 @@ function Controller() {
                 if (u.success) if (0 == u.messages.length) alert("No hay mensajes"); else {
                     var data = [];
                     for (var i = 0, l = u.messages.length; l > i; i++) {
-                        var message = u.messages[i];
-                        Cloud.Messages.show({
-                            message_id: message.id
-                        }, function(p) {
-                            if (p.success) {
-                                var mensaje = p.messages[0];
-                                var model = Alloy.createModel("Notificacion", {
-                                    Tipo: mensaje.custom_fields.IdTipo,
-                                    Titulo: mensaje.subject,
-                                    Texto: mensaje.body,
-                                    Alumno: data.IdAlumno,
-                                    Asignatura: mensaje.custom_fields.Asignatura,
-                                    Nota: mensaje.custom_fields.Nota,
-                                    Leida: false
-                                });
-                                var Notificaciones = Alloy.Collections.Notificacion;
-                                Notificaciones.add(model);
-                                model.save();
-                                Notificaciones.fetch();
-                                Cloud.Messages.remove({
-                                    message_id: mensaje.id
-                                }, function(e) {
-                                    e.success || alert("No se ha actualizado la información online" + e.message);
-                                });
-                            } else alert("Error de sincronizacion" + p.message);
+                        var mensaje = u.messages[i];
+                        var model = Alloy.createModel("Notificacion", {
+                            Tipo: mensaje.custom_fields.IdTipo,
+                            Titulo: mensaje.subject,
+                            Texto: mensaje.body,
+                            Alumno: data.IdAlumno,
+                            Asignatura: mensaje.custom_fields.Asignatura,
+                            Nota: mensaje.custom_fields.Nota,
+                            Leida: false
+                        });
+                        var Notificaciones = Alloy.Collections.Notificacion;
+                        Notificaciones.add(model);
+                        model.save();
+                        Notificaciones.fetch();
+                        Cloud.Messages.remove({
+                            message_id: mensaje.id
+                        }, function(e) {
+                            e.success || alert("No se ha actualizado la información online" + e.message);
                         });
                     }
                 } else alert("Error de sincronizacion" + u.message);

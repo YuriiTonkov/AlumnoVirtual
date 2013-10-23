@@ -1,7 +1,21 @@
 <Alloy>
 	<Window id="WinOpciones" class="container">
-		<TableView dataCollection="TipoNotificacion"  id="Marco">
-			<Require src="OpcionRow"/>
+		<TableView id="Marco">
+			<TableViewRow id="rowNotas">
+				<Label class="rowTitle" text="Notas"></Label>
+				<Label class="rowSubTitle" text="Notas de los examenes realizados"></Label>
+				<Label class="detalle" id="numNotas"></Label>
+			</TableViewRow>
+			<TableViewRow id="rowAvisos">
+				<Label class="rowTitle" text="Avisos"></Label>
+				<Label class="rowSubTitle" text="Avisos del profesor"></Label>
+				<Label class="detalle" id="numAvisos"></Label>
+			</TableViewRow>
+			<TableViewRow id="rowApuntes">
+				<Label class="rowTitle" text="Apuntes"></Label>
+				<Label class="rowSubTitle" text="Apuntes facilitados"></Label>
+				<Label class="detalle" id="NumApuntes"></Label>
+			</TableViewRow>
 		</TableView>
 	</Window>
 </Alloy>
