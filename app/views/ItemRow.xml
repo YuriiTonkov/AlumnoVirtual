@@ -1,0 +1,8 @@
+<Alloy>
+	<TableViewRow data ="{IdNotificacion}" hasChild="true" id="tblItemRow">
+		<Label class="rowEncIqz" id="lblEncabezadoIzq" text="{Profesor}"/>
+		<Label class="rowEncDcha" id="lblEncabezadoDcha" text="{Fecha}" />
+		<Label class="rowTitle" id="lblTitulo" text="{Titulo}"/>
+		<Label class="rowSubTitle" id="lblSubtitulo" text="{Subtitulo}"/>
+	</TableViewRow>
+</Alloy>

@@ -7,7 +7,10 @@ exports.definition = {
             Texto: "string",
             Alumno: "int",
             Asignatura: "string",
-            Leida: "boolean"
+            Leida: "boolean",
+            Nota: "int",
+            Fecha: "string",
+            Profesor: "string"
         },
         adapter: {
             type: "sql",

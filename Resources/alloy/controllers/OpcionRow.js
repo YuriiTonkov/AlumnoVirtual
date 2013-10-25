@@ -8,7 +8,7 @@ function Controller() {
     var exports = {};
     $.__views.tblOpcionRow = Ti.UI.createTableViewRow({
         backgroundColor: "white",
-        height: "40dp",
+        height: "50dp",
         data: "undefined" != typeof $model.__transform["IdTipoNotificacion"] ? $model.__transform["IdTipoNotificacion"] : $model.get("IdTipoNotificacion"),
         id: "tblOpcionRow"
     });
@@ -20,7 +20,7 @@ function Controller() {
         left: "16dp",
         font: {
             fontSize: 16,
-            fontFamily: "HelveticaNeue-UltraLight"
+            fontFamily: "HelveticaNeue"
         },
         id: "lblTitulo",
         text: "undefined" != typeof $model.__transform["Nombre"] ? $model.__transform["Nombre"] : $model.get("Nombre"),
@@ -30,7 +30,7 @@ function Controller() {
     $.__views.lblDescripcion = Ti.UI.createLabel({
         width: "100%",
         height: "10dp",
-        top: "26dp",
+        top: "35dp",
         font: {
             fontSize: 12,
             fontFamily: "HelveticaNeue-UltraLight"
@@ -47,8 +47,8 @@ function Controller() {
         height: "10dp",
         top: "26dp",
         font: {
-            fontSize: 12,
-            fontFamily: "HelveticaNeue-UltraLight"
+            fontSize: 14,
+            fontFamily: "HelveticaNeue"
         },
         textAlign: "right",
         right: "16dp",

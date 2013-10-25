@@ -1,0 +1,7 @@
+<Alloy>	
+	<Window id="WinListado" title="">	
+		<TableView dataCollection="Notificacion" dataTransform="Transform" dataFilter="Filtrado" id="TablaItems">
+				<Require src="ItemRow"/>
+		</TableView>
+	</Window>
+</Alloy>

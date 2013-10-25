@@ -8,7 +8,7 @@ function Controller() {
     var exports = {};
     $.__views.tblAlumnoRow = Ti.UI.createTableViewRow({
         backgroundColor: "white",
-        height: "40dp",
+        height: "50dp",
         editable: "true",
         data: "undefined" != typeof $model.__transform["IdAlumno"] ? $model.__transform["IdAlumno"] : $model.get("IdAlumno"),
         hasDetail: "true",
@@ -22,7 +22,7 @@ function Controller() {
         left: "16dp",
         font: {
             fontSize: 16,
-            fontFamily: "HelveticaNeue-UltraLight"
+            fontFamily: "HelveticaNeue"
         },
         id: "lblAlumno",
         text: "undefined" != typeof $model.__transform["nombrecompleto"] ? $model.__transform["nombrecompleto"] : $model.get("nombrecompleto"),

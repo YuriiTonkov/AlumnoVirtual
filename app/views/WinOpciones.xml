@@ -14,7 +14,7 @@
 			<TableViewRow id="rowApuntes">
 				<Label class="rowTitle" text="Apuntes"></Label>
 				<Label class="rowSubTitle" text="Apuntes facilitados"></Label>
-				<Label class="detalle" id="NumApuntes"></Label>
+				<Label class="detalle" id="numApuntes"></Label>
 			</TableViewRow>
 		</TableView>
 	</Window>

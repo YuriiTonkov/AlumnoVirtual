@@ -5,18 +5,12 @@ data = arg1;
 
 //Elementos de Interfaz
 $.WinOpciones.title = data.Nombre;
-//$.WinAlumnos.setRightNavButton($.addAlumno);
 var alumno = Alloy.Collections.Alumno;
 var model = alumno.get(data.IdAlumno);
 var datos = model.toJSON();
 
-//var opcion = Alloy.Collections.TipoNotificacion;
-//opcion.fetch();
-
 //Sincronizacion con la información en la NUBE.
-var contNotas = 0;
-var contAvisos = 0;
-var contApuntes = 0;        
+      
 if (datos.UsuarioCloud==true){
 		//Ya tiene usuario en la nube
 				Cloud.Users.login({ 
@@ -30,7 +24,14 @@ if (datos.UsuarioCloud==true){
 				            if (u.success) {
 					            if (u.messages.length == 0) {
 				                    alert('No hay mensajes' );
-				                   
+				                   var notificaciones = Alloy.Collections.Notificacion;
+				                   notificaciones.fetch();
+				                   var notas = notificaciones.where({Alumno: datos.IdAlumno, Tipo:1, Leida:0});
+				                   $.numNotas.text = notas.length;
+				                   var avisos = notificaciones.where({Alumno: datos.IdAlumno, Tipo:2, Leida:0});
+				                   $.numAvisos.text = avisos.length;
+				                   var apuntes = notificaciones.where({Alumno: datos.IdAlumno, Tipo:3, Leida:0});
+				                   $.numApuntes.text = apuntes.length;
 				                } else {
 					                var data = [];
 					                
@@ -46,22 +47,17 @@ if (datos.UsuarioCloud==true){
 													    "Asignatura": mensaje.custom_fields.Asignatura,
 													    "Nota": mensaje.custom_fields.Nota, 
 													    "Leida": false});
-											    	var Notificaciones = Alloy.Collections.Notificacion;
-										            Notificaciones.add(model);
+											    	var notificaciones = Alloy.Collections.Notificacion;
+										            notificaciones.add(model);
 										            model.save();
-										            Notificaciones.fetch();
+										            notificaciones.fetch();
 													
-													switch(mensaje.custom_fields.IdTipo)
-														{
-														case 1:
-														  contNotas = contNotas+1;
-														  break;
-														case 2:
-														 contAvisos= contAvisos+1;
-														  break;
-														case 3:
-														  contApuntes = contApuntes+1;
-														}								    	
+													var notas = notificaciones.where({Alumno: datos.IdAlumno, Tipo:1, Leida:0});
+								                   $.numNotas.text = notas.length;
+								                   var avisos = notificaciones.where({Alumno: datos.IdAlumno, Tipo:2, Leida:0});
+								                   $.numAvisos.text = avisos.length;
+								                   var apuntes = notificaciones.where({Alumno: datos.IdAlumno, Tipo:3, Leida:0});
+								                   $.numApuntes.text = apuntes.length;	    	
 											    	//Una vez se ha terminado la insercción se borra de la nube
 											    	Cloud.Messages.remove({
 													            message_id: mensaje.id
@@ -86,19 +82,25 @@ if (datos.UsuarioCloud==true){
 		    	
 		    	});
 		    }
-		    	    
-
-
-
-
-
-
 
 
 
 
 //Listener------------------------------------------------------------------------------------
+$.rowNotas.addEventListener('click', function() {
+    var tab = Alloy.createController("WinListado", {"alumno": datos.IdAlumno,"item":1});
+        Alloy.Globals.GrupoTab.activeTab.open(tab.getView());
+});
 
+$.rowAvisos.addEventListener('click', function() {
+    var tab = Alloy.createController("WinListado", {"alumno": datos.IdAlumno,"item":2});
+        Alloy.Globals.GrupoTab.activeTab.open(tab.getView());
+});
+
+$.rowApuntes.addEventListener('click', function() {
+    var tab = Alloy.createController("WinListado", {"alumno": datos.IdAlumno,"item":3});
+        Alloy.Globals.GrupoTab.activeTab.open(tab.getView());
+});
 
 $.WinOpciones.addEventListener('close', function() {
     Cloud.Users.logout(function (e) {

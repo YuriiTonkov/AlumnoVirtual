@@ -16,7 +16,7 @@
 //Todas las filas de las tablas llevan de fondo color blanco  
 "TableViewRow":{
 	backgroundColor : "white",
-	height:"40dp"
+	height:"50dp"
 }
 
 //Estilo de los titulos de las filas de las tablas
@@ -25,7 +25,7 @@
 	"height": "40dp",
 	"textAlign": "left",
 	"left": "16dp", 
-   "font": {fontSize:16, fontFamily:'HelveticaNeue-UltraLight'}
+   "font": {fontSize:16, fontFamily:'HelveticaNeue'}
 }
 //Estilo de los titulos de las filas de la tabla de Cursos.
 "#lblCurso":{
@@ -48,8 +48,8 @@
 ".rowSubTitle": {
 	"width": "100%",
 	"height": "10dp",
-	"top":"26dp",
-	"font": {fontSize:12,fontFamily:'HelveticaNeue-UltraLight'},
+	"top":"35dp",
+	"font": {fontSize:10,fontFamily:'HelveticaNeue-UltraLight'},
 	"textAlign": "left",
 	"left": "16dp"
 }
@@ -103,7 +103,26 @@
 	"width": "10%",
 	"height": "10dp",
 	"top":"26dp",
-	"font": {fontSize:12,fontFamily:'HelveticaNeue-UltraLight'},
+	"font": {fontSize:14,fontFamily:'HelveticaNeue'},
 	"textAlign": "right",
 	"right": "16dp"
+}
+
+".rowEncIqz":{
+	"width": "50%",
+	"height": "10dp",
+	"top":"3dp",
+	"font": {fontSize:10,fontFamily:'HelveticaNeue-UltraLight'},
+	"textAlign": "left",
+	"left": "16dp"
+	
+}
+".rowEncDcha":{
+	"width": "50%",
+	"height": "10dp",
+	"top":"3dp",
+	"font": {fontSize:10,fontFamily:'HelveticaNeue-UltraLight'},
+	"textAlign": "right",
+	"right": "16dp"
+	
 }
