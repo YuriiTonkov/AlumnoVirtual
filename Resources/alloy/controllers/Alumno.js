@@ -194,7 +194,7 @@ function Controller() {
         width: "100%",
         height: "12dp",
         textAlign: "left",
-        left: "6dp",
+        left: "16dp",
         top: "1dp",
         font: {
             fontSize: 10,
@@ -228,7 +228,7 @@ function Controller() {
         width: "100%",
         height: "12dp",
         textAlign: "left",
-        left: "6dp",
+        left: "16dp",
         top: "1dp",
         font: {
             fontSize: 10,
@@ -262,7 +262,7 @@ function Controller() {
         width: "100%",
         height: "12dp",
         textAlign: "left",
-        left: "6dp",
+        left: "16dp",
         top: "1dp",
         font: {
             fontSize: 10,
@@ -296,7 +296,7 @@ function Controller() {
         width: "100%",
         height: "12dp",
         textAlign: "left",
-        left: "6dp",
+        left: "16dp",
         top: "1dp",
         font: {
             fontSize: 10,
@@ -330,7 +330,7 @@ function Controller() {
         width: "100%",
         height: "12dp",
         textAlign: "left",
-        left: "6dp",
+        left: "16dp",
         top: "1dp",
         font: {
             fontSize: 10,
@@ -364,7 +364,7 @@ function Controller() {
         width: "100%",
         height: "12dp",
         textAlign: "left",
-        left: "6dp",
+        left: "16dp",
         top: "1dp",
         font: {
             fontSize: 10,
@@ -398,7 +398,7 @@ function Controller() {
         width: "100%",
         height: "12dp",
         textAlign: "left",
-        left: "6dp",
+        left: "16dp",
         top: "1dp",
         font: {
             fontSize: 10,
@@ -432,7 +432,7 @@ function Controller() {
         width: "100%",
         height: "12dp",
         textAlign: "left",
-        left: "6dp",
+        left: "16dp",
         top: "1dp",
         font: {
             fontSize: 10,
@@ -466,7 +466,7 @@ function Controller() {
         width: "100%",
         height: "12dp",
         textAlign: "left",
-        left: "6dp",
+        left: "16dp",
         top: "1dp",
         font: {
             fontSize: 10,
@@ -500,7 +500,7 @@ function Controller() {
         width: "100%",
         height: "12dp",
         textAlign: "left",
-        left: "6dp",
+        left: "16dp",
         top: "1dp",
         font: {
             fontSize: 10,
@@ -534,7 +534,7 @@ function Controller() {
         width: "100%",
         height: "12dp",
         textAlign: "left",
-        left: "6dp",
+        left: "16dp",
         top: "1dp",
         font: {
             fontSize: 10,
@@ -568,7 +568,7 @@ function Controller() {
         width: "100%",
         height: "12dp",
         textAlign: "left",
-        left: "6dp",
+        left: "16dp",
         top: "1dp",
         font: {
             fontSize: 10,
@@ -602,7 +602,7 @@ function Controller() {
         width: "100%",
         height: "12dp",
         textAlign: "left",
-        left: "6dp",
+        left: "16dp",
         top: "1dp",
         font: {
             fontSize: 10,

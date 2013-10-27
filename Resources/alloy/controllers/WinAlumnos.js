@@ -1,16 +1,16 @@
 function Controller() {
-    function __alloyId40() {
-        __alloyId40.opts || {};
-        var models = __alloyId39.models;
+    function __alloyId58() {
+        __alloyId58.opts || {};
+        var models = __alloyId57.models;
         var len = models.length;
         var rows = [];
         for (var i = 0; len > i; i++) {
-            var __alloyId37 = models[i];
-            __alloyId37.__transform = nombrecompleto(__alloyId37);
-            var __alloyId38 = Alloy.createController("AlumnoRow", {
-                $model: __alloyId37
+            var __alloyId55 = models[i];
+            __alloyId55.__transform = nombrecompleto(__alloyId55);
+            var __alloyId56 = Alloy.createController("AlumnoRow", {
+                $model: __alloyId55
             });
-            rows.push(__alloyId38.getViewEx({
+            rows.push(__alloyId56.getViewEx({
                 recurse: true
             }));
         }
@@ -48,8 +48,8 @@ function Controller() {
         id: "TablaAlumnos"
     });
     $.__views.WinAlumnos.add($.__views.TablaAlumnos);
-    var __alloyId39 = Alloy.Collections["Alumno"] || Alumno;
-    __alloyId39.on("fetch destroy change add remove reset", __alloyId40);
+    var __alloyId57 = Alloy.Collections["Alumno"] || Alumno;
+    __alloyId57.on("fetch destroy change add remove reset", __alloyId58);
     $.__views.addAlumno = Ti.UI.createButton({
         id: "addAlumno",
         title: "Nuevo alumno",
@@ -58,7 +58,7 @@ function Controller() {
     $.__views.WinAlumnos.add($.__views.addAlumno);
     NuevoAlumno ? $.__views.addAlumno.addEventListener("click", NuevoAlumno) : __defers["$.__views.addAlumno!click!NuevoAlumno"] = true;
     exports.destroy = function() {
-        __alloyId39.off("fetch destroy change add remove reset", __alloyId40);
+        __alloyId57.off("fetch destroy change add remove reset", __alloyId58);
     };
     _.extend($, $.__views);
     $.WinAlumnos.title = "Alumnos";

@@ -32,7 +32,7 @@ function Controller() {
         height: "10dp",
         top: "35dp",
         font: {
-            fontSize: 12,
+            fontSize: 10,
             fontFamily: "HelveticaNeue-UltraLight"
         },
         textAlign: "left",

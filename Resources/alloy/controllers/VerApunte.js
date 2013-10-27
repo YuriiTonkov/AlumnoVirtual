@@ -1,6 +1,6 @@
 function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
-    this.__controllerPath = "VerAviso";
+    this.__controllerPath = "VerApunte";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
@@ -13,13 +13,13 @@ function Controller() {
         id: "winVerAviso"
     });
     $.__views.winVerAviso && $.addTopLevelView($.__views.winVerAviso);
-    $.__views.__alloyId38 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId30 = Ti.UI.createTableViewRow({
         backgroundColor: "white",
         height: "30dp",
-        id: "__alloyId38"
+        id: "__alloyId30"
     });
-    var __alloyId39 = [];
-    __alloyId39.push($.__views.__alloyId38);
+    var __alloyId31 = [];
+    __alloyId31.push($.__views.__alloyId30);
     $.__views.lblEncIzq = Ti.UI.createLabel({
         width: "50%",
         height: "10dp",
@@ -32,7 +32,7 @@ function Controller() {
         left: "16dp",
         id: "lblEncIzq"
     });
-    $.__views.__alloyId38.add($.__views.lblEncIzq);
+    $.__views.__alloyId30.add($.__views.lblEncIzq);
     $.__views.lblEncDcha = Ti.UI.createLabel({
         width: "50%",
         height: "10dp",
@@ -45,13 +45,13 @@ function Controller() {
         right: "16dp",
         id: "lblEncDcha"
     });
-    $.__views.__alloyId38.add($.__views.lblEncDcha);
-    $.__views.__alloyId40 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId30.add($.__views.lblEncDcha);
+    $.__views.__alloyId32 = Ti.UI.createTableViewRow({
         backgroundColor: "white",
         height: "50dp",
-        id: "__alloyId40"
+        id: "__alloyId32"
     });
-    __alloyId39.push($.__views.__alloyId40);
+    __alloyId31.push($.__views.__alloyId32);
     $.__views.lblCalificacion = Ti.UI.createLabel({
         width: "100%",
         height: "12dp",
@@ -64,7 +64,7 @@ function Controller() {
         },
         id: "lblCalificacion"
     });
-    $.__views.__alloyId40.add($.__views.lblCalificacion);
+    $.__views.__alloyId32.add($.__views.lblCalificacion);
     $.__views.lblNota = Ti.UI.createLabel({
         width: "100%",
         height: "40dp",
@@ -76,14 +76,14 @@ function Controller() {
         },
         id: "lblNota"
     });
-    $.__views.__alloyId40.add($.__views.lblNota);
-    $.__views.__alloyId41 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId32.add($.__views.lblNota);
+    $.__views.__alloyId33 = Ti.UI.createTableViewRow({
         backgroundColor: "white",
         height: "50dp",
-        id: "__alloyId41"
+        id: "__alloyId33"
     });
-    __alloyId39.push($.__views.__alloyId41);
-    $.__views.__alloyId42 = Ti.UI.createLabel({
+    __alloyId31.push($.__views.__alloyId33);
+    $.__views.__alloyId34 = Ti.UI.createLabel({
         width: "100%",
         height: "12dp",
         textAlign: "left",
@@ -94,9 +94,9 @@ function Controller() {
             fontFamily: "HelveticaNeue-UltraLight"
         },
         text: "Asunto",
-        id: "__alloyId42"
+        id: "__alloyId34"
     });
-    $.__views.__alloyId41.add($.__views.__alloyId42);
+    $.__views.__alloyId33.add($.__views.__alloyId34);
     $.__views.lblSubject = Ti.UI.createLabel({
         width: "100%",
         height: "40dp",
@@ -108,14 +108,14 @@ function Controller() {
         },
         id: "lblSubject"
     });
-    $.__views.__alloyId41.add($.__views.lblSubject);
-    $.__views.__alloyId43 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId33.add($.__views.lblSubject);
+    $.__views.__alloyId35 = Ti.UI.createTableViewRow({
         backgroundColor: "white",
         height: "300dp",
-        id: "__alloyId43"
+        id: "__alloyId35"
     });
-    __alloyId39.push($.__views.__alloyId43);
-    $.__views.__alloyId44 = Ti.UI.createLabel({
+    __alloyId31.push($.__views.__alloyId35);
+    $.__views.__alloyId36 = Ti.UI.createLabel({
         width: "100%",
         height: "12dp",
         textAlign: "left",
@@ -126,9 +126,9 @@ function Controller() {
             fontFamily: "HelveticaNeue-UltraLight"
         },
         text: "Cuerpo",
-        id: "__alloyId44"
+        id: "__alloyId36"
     });
-    $.__views.__alloyId43.add($.__views.__alloyId44);
+    $.__views.__alloyId35.add($.__views.__alloyId36);
     $.__views.txtContent = Ti.UI.createLabel({
         top: "15dp",
         width: "80%",
@@ -141,12 +141,12 @@ function Controller() {
         },
         id: "txtContent"
     });
-    $.__views.__alloyId43.add($.__views.txtContent);
+    $.__views.__alloyId35.add($.__views.txtContent);
     $.__views.Marco = Ti.UI.createTableView({
         style: Ti.UI.iPhone.TableViewStyle.GROUPED,
         backgroundImage: "backGround320x416Base.png",
         top: "0dp",
-        data: __alloyId39,
+        data: __alloyId31,
         id: "Marco"
     });
     $.__views.winVerAviso.add($.__views.Marco);

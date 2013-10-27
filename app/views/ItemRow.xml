@@ -1,8 +1,9 @@
 <Alloy>
 	<TableViewRow data ="{IdNotificacion}" hasChild="true" id="tblItemRow">
-		<Label class="rowEncIqz" id="lblEncabezadoIzq" text="{Profesor}"/>
-		<Label class="rowEncDcha" id="lblEncabezadoDcha" text="{Fecha}" />
-		<Label class="rowTitle" id="lblTitulo" text="{Titulo}"/>
-		<Label class="rowSubTitle" id="lblSubtitulo" text="{Subtitulo}"/>
+		<Label class="rowImg" enabled="false" id="ImgIzq" text="{Leida}" textid="{IdNotificacion}"/>
+		<Label class="rowEncIzq" enabled="false" id="lblEncabezadoIzq" text="{Profesor}" textid="{IdNotificacion}"/>
+		<Label class="rowEncDcha" enabled="false" id="lblEncabezadoDcha" text="{Fecha}" textid="{IdNotificacion}" />
+		<Label class="rowTitle" enabled="false" id="lblTitulo" text="{Titulo}" textid="{IdNotificacion}"/>
+		<Label class="rowSubTitle" enabled="false" id="lblSubtitulo" text="{Subtitulo}" textid="{IdNotificacion}"/>
 	</TableViewRow>
 </Alloy>

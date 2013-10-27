@@ -3,6 +3,7 @@ var data = [];
 data = arg1;
 
 
+
 //Elementos de Interfaz
 $.WinOpciones.title = data.Nombre;
 var alumno = Alloy.Collections.Alumno;
@@ -12,6 +13,8 @@ var datos = model.toJSON();
 //Sincronizacion con la información en la NUBE.
       
 if (datos.UsuarioCloud==true){
+
+	$.activityScreen.show();
 		//Ya tiene usuario en la nube
 				Cloud.Users.login({ 
 		    	login: datos.Email,
@@ -23,7 +26,7 @@ if (datos.UsuarioCloud==true){
 						  Cloud.Messages.showInbox(function (u) {
 				            if (u.success) {
 					            if (u.messages.length == 0) {
-				                    alert('No hay mensajes' );
+				                    //alert('No hay mensajes' );
 				                   var notificaciones = Alloy.Collections.Notificacion;
 				                   notificaciones.fetch();
 				                   var notas = notificaciones.where({Alumno: datos.IdAlumno, Tipo:1, Leida:0});
@@ -32,6 +35,7 @@ if (datos.UsuarioCloud==true){
 				                   $.numAvisos.text = avisos.length;
 				                   var apuntes = notificaciones.where({Alumno: datos.IdAlumno, Tipo:3, Leida:0});
 				                   $.numApuntes.text = apuntes.length;
+				                   $.activityScreen.hide();
 				                } else {
 					                var data = [];
 					                
@@ -52,12 +56,7 @@ if (datos.UsuarioCloud==true){
 										            model.save();
 										            notificaciones.fetch();
 													
-													var notas = notificaciones.where({Alumno: datos.IdAlumno, Tipo:1, Leida:0});
-								                   $.numNotas.text = notas.length;
-								                   var avisos = notificaciones.where({Alumno: datos.IdAlumno, Tipo:2, Leida:0});
-								                   $.numAvisos.text = avisos.length;
-								                   var apuntes = notificaciones.where({Alumno: datos.IdAlumno, Tipo:3, Leida:0});
-								                   $.numApuntes.text = apuntes.length;	    	
+														    	
 											    	//Una vez se ha terminado la insercción se borra de la nube
 											    	Cloud.Messages.remove({
 													            message_id: mensaje.id
@@ -69,15 +68,24 @@ if (datos.UsuarioCloud==true){
 													            }
 													        });
 				                    }
-						             
+						            var notas = notificaciones.where({Alumno: datos.IdAlumno, Tipo:1, Leida:0});
+								    $.numNotas.text = notas.length;
+								    var avisos = notificaciones.where({Alumno: datos.IdAlumno, Tipo:2, Leida:0});
+								    $.numAvisos.text = avisos.length;
+								    var apuntes = notificaciones.where({Alumno: datos.IdAlumno, Tipo:3, Leida:0});
+								    $.numApuntes.text = apuntes.length;
+								    $.activityScreen.hide();
+								     
 					            }
 				            } else {
 								alert("Error de sincronizacion"+  u.message);
+								$.activityScreen.hide();
 				            }
 				        });
 		        		
 		    		} else {
 		        		alert("Login failed.");
+		        		$.activityScreen.hide();
 		    		}
 		    	
 		    	});
@@ -112,4 +120,17 @@ $.WinOpciones.addEventListener('close', function() {
 		            ((e.error && e.message) || JSON.stringify(e)));
          }
     });
+});
+
+$.WinOpciones.addEventListener('focus',function(e){
+    // Ti.API.info('ENTRO EN EL FOCUS');
+    var notificaciones = Alloy.Collections.Notificacion;
+    notificaciones.fetch();
+    var notas = notificaciones.where({Alumno: datos.IdAlumno, Tipo:1, Leida:0});
+	$.numNotas.text = notas.length;
+	var avisos = notificaciones.where({Alumno: datos.IdAlumno, Tipo:2, Leida:0});
+	$.numAvisos.text = avisos.length;
+	var apuntes = notificaciones.where({Alumno: datos.IdAlumno, Tipo:3, Leida:0});
+	$.numApuntes.text = apuntes.length;
+	
 });

@@ -1,5 +1,6 @@
 <Alloy>
 	<Window id="WinOpciones" class="container">
+		<ActivityIndicator class="cargando" id="activityScreen" message="Cargando..."/>
 		<TableView id="Marco">
 			<TableViewRow id="rowNotas">
 				<Label class="rowTitle" text="Notas"></Label>

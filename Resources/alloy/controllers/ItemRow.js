@@ -14,6 +14,22 @@ function Controller() {
         id: "tblItemRow"
     });
     $.__views.tblItemRow && $.addTopLevelView($.__views.tblItemRow);
+    $.__views.ImgIzq = Ti.UI.createLabel({
+        width: "16dp",
+        height: "10dp",
+        top: "22dp",
+        font: {
+            fontSize: 10,
+            fontFamily: "HelveticaNeue"
+        },
+        textAlign: "left",
+        left: "3dp",
+        enabled: "false",
+        id: "ImgIzq",
+        text: "undefined" != typeof $model.__transform["Leida"] ? $model.__transform["Leida"] : $model.get("Leida"),
+        textid: "undefined" != typeof $model.__transform["IdNotificacion"] ? $model.__transform["IdNotificacion"] : $model.get("IdNotificacion")
+    });
+    $.__views.tblItemRow.add($.__views.ImgIzq);
     $.__views.lblEncabezadoIzq = Ti.UI.createLabel({
         width: "50%",
         height: "10dp",
@@ -24,8 +40,10 @@ function Controller() {
         },
         textAlign: "left",
         left: "16dp",
+        enabled: "false",
         id: "lblEncabezadoIzq",
-        text: "undefined" != typeof $model.__transform["Profesor"] ? $model.__transform["Profesor"] : $model.get("Profesor")
+        text: "undefined" != typeof $model.__transform["Profesor"] ? $model.__transform["Profesor"] : $model.get("Profesor"),
+        textid: "undefined" != typeof $model.__transform["IdNotificacion"] ? $model.__transform["IdNotificacion"] : $model.get("IdNotificacion")
     });
     $.__views.tblItemRow.add($.__views.lblEncabezadoIzq);
     $.__views.lblEncabezadoDcha = Ti.UI.createLabel({
@@ -38,8 +56,10 @@ function Controller() {
         },
         textAlign: "right",
         right: "16dp",
+        enabled: "false",
         id: "lblEncabezadoDcha",
-        text: "undefined" != typeof $model.__transform["Fecha"] ? $model.__transform["Fecha"] : $model.get("Fecha")
+        text: "undefined" != typeof $model.__transform["Fecha"] ? $model.__transform["Fecha"] : $model.get("Fecha"),
+        textid: "undefined" != typeof $model.__transform["IdNotificacion"] ? $model.__transform["IdNotificacion"] : $model.get("IdNotificacion")
     });
     $.__views.tblItemRow.add($.__views.lblEncabezadoDcha);
     $.__views.lblTitulo = Ti.UI.createLabel({
@@ -51,8 +71,10 @@ function Controller() {
             fontSize: 16,
             fontFamily: "HelveticaNeue"
         },
+        enabled: "false",
         id: "lblTitulo",
-        text: "undefined" != typeof $model.__transform["Titulo"] ? $model.__transform["Titulo"] : $model.get("Titulo")
+        text: "undefined" != typeof $model.__transform["Titulo"] ? $model.__transform["Titulo"] : $model.get("Titulo"),
+        textid: "undefined" != typeof $model.__transform["IdNotificacion"] ? $model.__transform["IdNotificacion"] : $model.get("IdNotificacion")
     });
     $.__views.tblItemRow.add($.__views.lblTitulo);
     $.__views.lblSubtitulo = Ti.UI.createLabel({
@@ -60,23 +82,19 @@ function Controller() {
         height: "10dp",
         top: "35dp",
         font: {
-            fontSize: 12,
+            fontSize: 10,
             fontFamily: "HelveticaNeue-UltraLight"
         },
         textAlign: "left",
         left: "16dp",
+        enabled: "false",
         id: "lblSubtitulo",
-        text: "undefined" != typeof $model.__transform["Subtitulo"] ? $model.__transform["Subtitulo"] : $model.get("Subtitulo")
+        text: "undefined" != typeof $model.__transform["Subtitulo"] ? $model.__transform["Subtitulo"] : $model.get("Subtitulo"),
+        textid: "undefined" != typeof $model.__transform["IdNotificacion"] ? $model.__transform["IdNotificacion"] : $model.get("IdNotificacion")
     });
     $.__views.tblItemRow.add($.__views.lblSubtitulo);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    $.tblItemRow.addEventListener("click", function(e) {
-        var tabItemController = Alloy.createController("VerAviso", {
-            IdNotificacion: e.source.data
-        });
-        Alloy.Globals.GrupoTab.activeTab.open(tabItemController.getView());
-    });
     _.extend($, exports);
 }
 

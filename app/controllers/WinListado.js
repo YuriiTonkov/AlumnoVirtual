@@ -31,4 +31,14 @@ function Filtrado(collection){
 }
 
 
-
+$.TablaItems.addEventListener("click", function(e){
+    //console.debug("Añadimos el handler para el evento de click");
+    	if (e.source.id == "tblItemRow") {
+        var tabItemController = Alloy.createController("VerNota", {"IdNotificacion":e.source.data});
+        Alloy.Globals.GrupoTab.activeTab.open(tabItemController.getView());
+      } else {
+      	var tabItemController = Alloy.createController("VerNota", {"IdNotificacion":e.source.textid});
+        Alloy.Globals.GrupoTab.activeTab.open(tabItemController.getView());
+      }
+      
+});

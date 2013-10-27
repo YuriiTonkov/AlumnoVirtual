@@ -14,22 +14,22 @@ function Controller() {
     $.__views.GrupoTab = Ti.UI.createTabGroup({
         id: "GrupoTab"
     });
-    $.__views.__alloyId69 = Alloy.createController("TabPrincipal", {
-        id: "__alloyId69"
+    $.__views.__alloyId87 = Alloy.createController("TabPrincipal", {
+        id: "__alloyId87"
     });
-    $.__views.GrupoTab.addTab($.__views.__alloyId69.getViewEx({
+    $.__views.GrupoTab.addTab($.__views.__alloyId87.getViewEx({
         recurse: true
     }));
-    $.__views.__alloyId71 = Alloy.createController("TabCalendario", {
-        id: "__alloyId71"
+    $.__views.__alloyId89 = Alloy.createController("TabCalendario", {
+        id: "__alloyId89"
     });
-    $.__views.GrupoTab.addTab($.__views.__alloyId71.getViewEx({
+    $.__views.GrupoTab.addTab($.__views.__alloyId89.getViewEx({
         recurse: true
     }));
-    $.__views.__alloyId73 = Alloy.createController("TabConfiguracion", {
-        id: "__alloyId73"
+    $.__views.__alloyId91 = Alloy.createController("TabConfiguracion", {
+        id: "__alloyId91"
     });
-    $.__views.GrupoTab.addTab($.__views.__alloyId73.getViewEx({
+    $.__views.GrupoTab.addTab($.__views.__alloyId91.getViewEx({
         recurse: true
     }));
     $.__views.GrupoTab && $.addTopLevelView($.__views.GrupoTab);

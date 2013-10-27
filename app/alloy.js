@@ -11,3 +11,4 @@
 // Alloy.Globals.someGlobalFunction = function(){};
 var Cloud = require('ti.cloud');
 Cloud.debug = true;  // optional; if you add this line, set it to false for production
+
