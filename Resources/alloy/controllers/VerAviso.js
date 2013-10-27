@@ -52,38 +52,7 @@ function Controller() {
         id: "__alloyId40"
     });
     __alloyId39.push($.__views.__alloyId40);
-    $.__views.lblCalificacion = Ti.UI.createLabel({
-        width: "100%",
-        height: "12dp",
-        textAlign: "left",
-        left: "16dp",
-        top: "1dp",
-        font: {
-            fontSize: 10,
-            fontFamily: "HelveticaNeue-UltraLight"
-        },
-        id: "lblCalificacion"
-    });
-    $.__views.__alloyId40.add($.__views.lblCalificacion);
-    $.__views.lblNota = Ti.UI.createLabel({
-        width: "100%",
-        height: "40dp",
-        textAlign: "left",
-        left: "16dp",
-        font: {
-            fontSize: 16,
-            fontFamily: "HelveticaNeue"
-        },
-        id: "lblNota"
-    });
-    $.__views.__alloyId40.add($.__views.lblNota);
-    $.__views.__alloyId41 = Ti.UI.createTableViewRow({
-        backgroundColor: "white",
-        height: "50dp",
-        id: "__alloyId41"
-    });
-    __alloyId39.push($.__views.__alloyId41);
-    $.__views.__alloyId42 = Ti.UI.createLabel({
+    $.__views.__alloyId41 = Ti.UI.createLabel({
         width: "100%",
         height: "12dp",
         textAlign: "left",
@@ -94,9 +63,9 @@ function Controller() {
             fontFamily: "HelveticaNeue-UltraLight"
         },
         text: "Asunto",
-        id: "__alloyId42"
+        id: "__alloyId41"
     });
-    $.__views.__alloyId41.add($.__views.__alloyId42);
+    $.__views.__alloyId40.add($.__views.__alloyId41);
     $.__views.lblSubject = Ti.UI.createLabel({
         width: "100%",
         height: "40dp",
@@ -108,14 +77,14 @@ function Controller() {
         },
         id: "lblSubject"
     });
-    $.__views.__alloyId41.add($.__views.lblSubject);
-    $.__views.__alloyId43 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId40.add($.__views.lblSubject);
+    $.__views.__alloyId42 = Ti.UI.createTableViewRow({
         backgroundColor: "white",
         height: "300dp",
-        id: "__alloyId43"
+        id: "__alloyId42"
     });
-    __alloyId39.push($.__views.__alloyId43);
-    $.__views.__alloyId44 = Ti.UI.createLabel({
+    __alloyId39.push($.__views.__alloyId42);
+    $.__views.__alloyId43 = Ti.UI.createLabel({
         width: "100%",
         height: "12dp",
         textAlign: "left",
@@ -125,10 +94,10 @@ function Controller() {
             fontSize: 10,
             fontFamily: "HelveticaNeue-UltraLight"
         },
-        text: "Cuerpo",
-        id: "__alloyId44"
+        text: "Detalle",
+        id: "__alloyId43"
     });
-    $.__views.__alloyId43.add($.__views.__alloyId44);
+    $.__views.__alloyId42.add($.__views.__alloyId43);
     $.__views.txtContent = Ti.UI.createLabel({
         top: "15dp",
         width: "80%",
@@ -141,7 +110,7 @@ function Controller() {
         },
         id: "txtContent"
     });
-    $.__views.__alloyId43.add($.__views.txtContent);
+    $.__views.__alloyId42.add($.__views.txtContent);
     $.__views.Marco = Ti.UI.createTableView({
         style: Ti.UI.iPhone.TableViewStyle.GROUPED,
         backgroundImage: "backGround320x416Base.png",
@@ -164,8 +133,6 @@ function Controller() {
     $.lblEncDcha.text = datos.Fecha;
     $.lblSubject.text = datos.Titulo;
     $.txtContent.text = datos.Texto;
-    $.lblCalificacion.text = "Calificación " + datos.Asignatura;
-    $.lblNota.text = datos.Nota;
     model.save({
         Leida: 1
     });

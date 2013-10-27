@@ -6,15 +6,11 @@
 					<Label class="rowEncDcha" id="lblEncDcha"/>	
 			</TableViewRow>	
 			<TableViewRow height="50dp">
-			 	<Label class="labelAlumno" id="lblCalificacion"></Label>
-				<Label class="rowTitle"  id="lblNota" ></Label>
-			</TableViewRow>
-			<TableViewRow height="50dp">
 			 	<Label class="labelAlumno">Asunto</Label>
 				<Label class="rowTitle"  id="lblSubject" ></Label>
 			</TableViewRow>
 			<TableViewRow height="300dp">
-			 	<Label class="labelAlumno">Cuerpo</Label>
+			 	<Label class="labelAlumno">Detalle</Label>
 				<Label class="textNotificacion" id="txtContent"></Label>
 			</TableViewRow>
 			<FooterView>

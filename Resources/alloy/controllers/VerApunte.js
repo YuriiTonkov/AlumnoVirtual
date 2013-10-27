@@ -52,7 +52,7 @@ function Controller() {
         id: "__alloyId32"
     });
     __alloyId31.push($.__views.__alloyId32);
-    $.__views.lblCalificacion = Ti.UI.createLabel({
+    $.__views.lblEnlace = Ti.UI.createLabel({
         width: "100%",
         height: "12dp",
         textAlign: "left",
@@ -62,10 +62,11 @@ function Controller() {
             fontSize: 10,
             fontFamily: "HelveticaNeue-UltraLight"
         },
-        id: "lblCalificacion"
+        text: "Enlace",
+        id: "lblEnlace"
     });
-    $.__views.__alloyId32.add($.__views.lblCalificacion);
-    $.__views.lblNota = Ti.UI.createLabel({
+    $.__views.__alloyId32.add($.__views.lblEnlace);
+    $.__views.lblEnlace = Ti.UI.createLabel({
         width: "100%",
         height: "40dp",
         textAlign: "left",
@@ -74,9 +75,9 @@ function Controller() {
             fontSize: 16,
             fontFamily: "HelveticaNeue"
         },
-        id: "lblNota"
+        id: "lblEnlace"
     });
-    $.__views.__alloyId32.add($.__views.lblNota);
+    $.__views.__alloyId32.add($.__views.lblEnlace);
     $.__views.__alloyId33 = Ti.UI.createTableViewRow({
         backgroundColor: "white",
         height: "50dp",
@@ -164,8 +165,7 @@ function Controller() {
     $.lblEncDcha.text = datos.Fecha;
     $.lblSubject.text = datos.Titulo;
     $.txtContent.text = datos.Texto;
-    $.lblCalificacion.text = "Calificación " + datos.Asignatura;
-    $.lblNota.text = datos.Nota;
+    $.lblEnlace.text = datos.Enlace;
     model.save({
         Leida: 1
     });

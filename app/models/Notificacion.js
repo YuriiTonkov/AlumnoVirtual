@@ -10,7 +10,8 @@ exports.definition = {
 		    "Leida": "boolean",
 		    "Nota": "int",
 		    "Fecha" : "string",
-		    "Profesor":"string"
+		    "Profesor":"string",
+		    "Enlace":"string"
 		},
 		adapter: {
 			type: "sql",

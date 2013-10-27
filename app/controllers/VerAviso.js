@@ -11,8 +11,7 @@ $.lblEncIzq.text = "Profesor " + datos.Profesor;
 $.lblEncDcha.text = datos.Fecha;
 $.lblSubject.text = datos.Titulo;
 $.txtContent.text = datos.Texto;
-$.lblCalificacion.text = "Calificación " + datos.Asignatura;
-$.lblNota.text = datos.Nota;
+
 
 //Marcamos la notificacion como leida
 

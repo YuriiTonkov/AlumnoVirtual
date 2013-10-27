@@ -13,13 +13,13 @@ function Controller() {
         id: "winVerAviso"
     });
     $.__views.winVerAviso && $.addTopLevelView($.__views.winVerAviso);
-    $.__views.__alloyId46 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId45 = Ti.UI.createTableViewRow({
         backgroundColor: "white",
         height: "30dp",
-        id: "__alloyId46"
+        id: "__alloyId45"
     });
-    var __alloyId47 = [];
-    __alloyId47.push($.__views.__alloyId46);
+    var __alloyId46 = [];
+    __alloyId46.push($.__views.__alloyId45);
     $.__views.lblEncIzq = Ti.UI.createLabel({
         width: "50%",
         height: "10dp",
@@ -32,7 +32,7 @@ function Controller() {
         left: "16dp",
         id: "lblEncIzq"
     });
-    $.__views.__alloyId46.add($.__views.lblEncIzq);
+    $.__views.__alloyId45.add($.__views.lblEncIzq);
     $.__views.lblEncDcha = Ti.UI.createLabel({
         width: "50%",
         height: "10dp",
@@ -45,13 +45,13 @@ function Controller() {
         right: "16dp",
         id: "lblEncDcha"
     });
-    $.__views.__alloyId46.add($.__views.lblEncDcha);
-    $.__views.__alloyId48 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId45.add($.__views.lblEncDcha);
+    $.__views.__alloyId47 = Ti.UI.createTableViewRow({
         backgroundColor: "white",
         height: "50dp",
-        id: "__alloyId48"
+        id: "__alloyId47"
     });
-    __alloyId47.push($.__views.__alloyId48);
+    __alloyId46.push($.__views.__alloyId47);
     $.__views.lblCalificacion = Ti.UI.createLabel({
         width: "100%",
         height: "12dp",
@@ -64,7 +64,7 @@ function Controller() {
         },
         id: "lblCalificacion"
     });
-    $.__views.__alloyId48.add($.__views.lblCalificacion);
+    $.__views.__alloyId47.add($.__views.lblCalificacion);
     $.__views.lblNota = Ti.UI.createLabel({
         width: "100%",
         height: "40dp",
@@ -76,14 +76,14 @@ function Controller() {
         },
         id: "lblNota"
     });
-    $.__views.__alloyId48.add($.__views.lblNota);
-    $.__views.__alloyId49 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId47.add($.__views.lblNota);
+    $.__views.__alloyId48 = Ti.UI.createTableViewRow({
         backgroundColor: "white",
         height: "50dp",
-        id: "__alloyId49"
+        id: "__alloyId48"
     });
-    __alloyId47.push($.__views.__alloyId49);
-    $.__views.__alloyId50 = Ti.UI.createLabel({
+    __alloyId46.push($.__views.__alloyId48);
+    $.__views.__alloyId49 = Ti.UI.createLabel({
         width: "100%",
         height: "12dp",
         textAlign: "left",
@@ -94,9 +94,9 @@ function Controller() {
             fontFamily: "HelveticaNeue-UltraLight"
         },
         text: "Asunto",
-        id: "__alloyId50"
+        id: "__alloyId49"
     });
-    $.__views.__alloyId49.add($.__views.__alloyId50);
+    $.__views.__alloyId48.add($.__views.__alloyId49);
     $.__views.lblSubject = Ti.UI.createLabel({
         width: "100%",
         height: "40dp",
@@ -108,14 +108,14 @@ function Controller() {
         },
         id: "lblSubject"
     });
-    $.__views.__alloyId49.add($.__views.lblSubject);
-    $.__views.__alloyId51 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId48.add($.__views.lblSubject);
+    $.__views.__alloyId50 = Ti.UI.createTableViewRow({
         backgroundColor: "white",
         height: "300dp",
-        id: "__alloyId51"
+        id: "__alloyId50"
     });
-    __alloyId47.push($.__views.__alloyId51);
-    $.__views.__alloyId52 = Ti.UI.createLabel({
+    __alloyId46.push($.__views.__alloyId50);
+    $.__views.__alloyId51 = Ti.UI.createLabel({
         width: "100%",
         height: "12dp",
         textAlign: "left",
@@ -126,9 +126,9 @@ function Controller() {
             fontFamily: "HelveticaNeue-UltraLight"
         },
         text: "Cuerpo",
-        id: "__alloyId52"
+        id: "__alloyId51"
     });
-    $.__views.__alloyId51.add($.__views.__alloyId52);
+    $.__views.__alloyId50.add($.__views.__alloyId51);
     $.__views.txtContent = Ti.UI.createLabel({
         top: "15dp",
         width: "80%",
@@ -141,12 +141,12 @@ function Controller() {
         },
         id: "txtContent"
     });
-    $.__views.__alloyId51.add($.__views.txtContent);
+    $.__views.__alloyId50.add($.__views.txtContent);
     $.__views.Marco = Ti.UI.createTableView({
         style: Ti.UI.iPhone.TableViewStyle.GROUPED,
         backgroundImage: "backGround320x416Base.png",
         top: "0dp",
-        data: __alloyId47,
+        data: __alloyId46,
         id: "Marco"
     });
     $.__views.winVerAviso.add($.__views.Marco);

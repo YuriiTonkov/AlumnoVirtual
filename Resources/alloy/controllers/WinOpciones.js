@@ -32,9 +32,9 @@ function Controller() {
         height: "50dp",
         id: "rowNotas"
     });
-    var __alloyId64 = [];
-    __alloyId64.push($.__views.rowNotas);
-    $.__views.__alloyId65 = Ti.UI.createLabel({
+    var __alloyId63 = [];
+    __alloyId63.push($.__views.rowNotas);
+    $.__views.__alloyId64 = Ti.UI.createLabel({
         width: "100%",
         height: "40dp",
         textAlign: "left",
@@ -44,10 +44,10 @@ function Controller() {
             fontFamily: "HelveticaNeue"
         },
         text: "Notas",
-        id: "__alloyId65"
+        id: "__alloyId64"
     });
-    $.__views.rowNotas.add($.__views.__alloyId65);
-    $.__views.__alloyId66 = Ti.UI.createLabel({
+    $.__views.rowNotas.add($.__views.__alloyId64);
+    $.__views.__alloyId65 = Ti.UI.createLabel({
         width: "100%",
         height: "10dp",
         top: "35dp",
@@ -58,9 +58,9 @@ function Controller() {
         textAlign: "left",
         left: "16dp",
         text: "Notas de los examenes realizados",
-        id: "__alloyId66"
+        id: "__alloyId65"
     });
-    $.__views.rowNotas.add($.__views.__alloyId66);
+    $.__views.rowNotas.add($.__views.__alloyId65);
     $.__views.numNotas = Ti.UI.createLabel({
         width: "10%",
         height: "10dp",
@@ -79,8 +79,8 @@ function Controller() {
         height: "50dp",
         id: "rowAvisos"
     });
-    __alloyId64.push($.__views.rowAvisos);
-    $.__views.__alloyId67 = Ti.UI.createLabel({
+    __alloyId63.push($.__views.rowAvisos);
+    $.__views.__alloyId66 = Ti.UI.createLabel({
         width: "100%",
         height: "40dp",
         textAlign: "left",
@@ -90,10 +90,10 @@ function Controller() {
             fontFamily: "HelveticaNeue"
         },
         text: "Avisos",
-        id: "__alloyId67"
+        id: "__alloyId66"
     });
-    $.__views.rowAvisos.add($.__views.__alloyId67);
-    $.__views.__alloyId68 = Ti.UI.createLabel({
+    $.__views.rowAvisos.add($.__views.__alloyId66);
+    $.__views.__alloyId67 = Ti.UI.createLabel({
         width: "100%",
         height: "10dp",
         top: "35dp",
@@ -104,9 +104,9 @@ function Controller() {
         textAlign: "left",
         left: "16dp",
         text: "Avisos del profesor",
-        id: "__alloyId68"
+        id: "__alloyId67"
     });
-    $.__views.rowAvisos.add($.__views.__alloyId68);
+    $.__views.rowAvisos.add($.__views.__alloyId67);
     $.__views.numAvisos = Ti.UI.createLabel({
         width: "10%",
         height: "10dp",
@@ -125,8 +125,8 @@ function Controller() {
         height: "50dp",
         id: "rowApuntes"
     });
-    __alloyId64.push($.__views.rowApuntes);
-    $.__views.__alloyId69 = Ti.UI.createLabel({
+    __alloyId63.push($.__views.rowApuntes);
+    $.__views.__alloyId68 = Ti.UI.createLabel({
         width: "100%",
         height: "40dp",
         textAlign: "left",
@@ -136,10 +136,10 @@ function Controller() {
             fontFamily: "HelveticaNeue"
         },
         text: "Apuntes",
-        id: "__alloyId69"
+        id: "__alloyId68"
     });
-    $.__views.rowApuntes.add($.__views.__alloyId69);
-    $.__views.__alloyId70 = Ti.UI.createLabel({
+    $.__views.rowApuntes.add($.__views.__alloyId68);
+    $.__views.__alloyId69 = Ti.UI.createLabel({
         width: "100%",
         height: "10dp",
         top: "35dp",
@@ -150,9 +150,9 @@ function Controller() {
         textAlign: "left",
         left: "16dp",
         text: "Apuntes facilitados",
-        id: "__alloyId70"
+        id: "__alloyId69"
     });
-    $.__views.rowApuntes.add($.__views.__alloyId70);
+    $.__views.rowApuntes.add($.__views.__alloyId69);
     $.__views.numApuntes = Ti.UI.createLabel({
         width: "10%",
         height: "10dp",
@@ -170,7 +170,7 @@ function Controller() {
         style: Ti.UI.iPhone.TableViewStyle.GROUPED,
         backgroundImage: "backGround320x416Base.png",
         top: "0dp",
-        data: __alloyId64,
+        data: __alloyId63,
         id: "Marco"
     });
     $.__views.WinOpciones.add($.__views.Marco);
