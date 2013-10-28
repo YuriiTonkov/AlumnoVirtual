@@ -74,16 +74,47 @@ function Controller() {
         $.WinListado.title = "Apuntes";
     }
     $.TablaItems.addEventListener("click", function(e) {
-        if ("tblItemRow" == e.source.id) {
-            var tabItemController = Alloy.createController("VerNota", {
-                IdNotificacion: e.source.data
-            });
-            Alloy.Globals.GrupoTab.activeTab.open(tabItemController.getView());
-        } else {
-            var tabItemController = Alloy.createController("VerNota", {
-                IdNotificacion: e.source.textid
-            });
-            Alloy.Globals.GrupoTab.activeTab.open(tabItemController.getView());
+        switch (data.item) {
+          case 1:
+            if ("tblItemRow" == e.source.id) {
+                var tabItemController = Alloy.createController("VerNota", {
+                    IdNotificacion: e.source.data
+                });
+                Alloy.Globals.GrupoTab.activeTab.open(tabItemController.getView());
+            } else {
+                var tabItemController = Alloy.createController("VerNota", {
+                    IdNotificacion: e.source.textid
+                });
+                Alloy.Globals.GrupoTab.activeTab.open(tabItemController.getView());
+            }
+            break;
+
+          case 2:
+            if ("tblItemRow" == e.source.id) {
+                var tabItemController = Alloy.createController("VerAviso", {
+                    IdNotificacion: e.source.data
+                });
+                Alloy.Globals.GrupoTab.activeTab.open(tabItemController.getView());
+            } else {
+                var tabItemController = Alloy.createController("VerAviso", {
+                    IdNotificacion: e.source.textid
+                });
+                Alloy.Globals.GrupoTab.activeTab.open(tabItemController.getView());
+            }
+            break;
+
+          case 3:
+            if ("tblItemRow" == e.source.id) {
+                var tabItemController = Alloy.createController("VerApunte", {
+                    IdNotificacion: e.source.data
+                });
+                Alloy.Globals.GrupoTab.activeTab.open(tabItemController.getView());
+            } else {
+                var tabItemController = Alloy.createController("VerApunte", {
+                    IdNotificacion: e.source.textid
+                });
+                Alloy.Globals.GrupoTab.activeTab.open(tabItemController.getView());
+            }
         }
     });
     _.extend($, exports);

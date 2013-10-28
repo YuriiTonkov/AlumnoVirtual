@@ -33,12 +33,35 @@ function Filtrado(collection){
 
 $.TablaItems.addEventListener("click", function(e){
     //console.debug("Añadimos el handler para el evento de click");
-    	if (e.source.id == "tblItemRow") {
+    switch (data.item){
+	case 1:
+		if (e.source.id == "tblItemRow") {
         var tabItemController = Alloy.createController("VerNota", {"IdNotificacion":e.source.data});
         Alloy.Globals.GrupoTab.activeTab.open(tabItemController.getView());
       } else {
       	var tabItemController = Alloy.createController("VerNota", {"IdNotificacion":e.source.textid});
         Alloy.Globals.GrupoTab.activeTab.open(tabItemController.getView());
       }
+	break;
+	case 2:
+		if (e.source.id == "tblItemRow") {
+        var tabItemController = Alloy.createController("VerAviso", {"IdNotificacion":e.source.data});
+        Alloy.Globals.GrupoTab.activeTab.open(tabItemController.getView());
+      } else {
+      	var tabItemController = Alloy.createController("VerAviso", {"IdNotificacion":e.source.textid});
+        Alloy.Globals.GrupoTab.activeTab.open(tabItemController.getView());
+      }
+	break;
+	case 3:
+		if (e.source.id == "tblItemRow") {
+        var tabItemController = Alloy.createController("VerApunte", {"IdNotificacion":e.source.data});
+        Alloy.Globals.GrupoTab.activeTab.open(tabItemController.getView());
+      } else {
+      	var tabItemController = Alloy.createController("VerApunte", {"IdNotificacion":e.source.textid});
+        Alloy.Globals.GrupoTab.activeTab.open(tabItemController.getView());
+      }
+	break;
+	}
+    	
       
 });

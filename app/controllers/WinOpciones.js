@@ -47,9 +47,11 @@ if (datos.UsuarioCloud==true){
 													    "Tipo": mensaje.custom_fields.IdTipo,
 													    "Titulo": mensaje.subject,
 													    "Texto": mensaje.body,
-													    "Alumno": data.IdAlumno,
+													    "Alumno": datos.IdAlumno,
+													    "Fecha": mensaje.custom_fields.Fecha,
 													    "Asignatura": mensaje.custom_fields.Asignatura,
-													    "Nota": mensaje.custom_fields.Nota, 
+													    "Nota": mensaje.custom_fields.Nota,
+													    "Profesor": mensaje.custom_fields.Profesor, 
 													    "Leida": false});
 											    	var notificaciones = Alloy.Collections.Notificacion;
 										            notificaciones.add(model);

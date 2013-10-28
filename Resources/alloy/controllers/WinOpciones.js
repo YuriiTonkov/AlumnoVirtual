@@ -215,16 +215,17 @@ function Controller() {
                         $.numApuntes.text = apuntes.length;
                         $.activityScreen.hide();
                     } else {
-                        var data = [];
                         for (var i = 0, l = u.messages.length; l > i; i++) {
                             var mensaje = u.messages[i];
                             var model = Alloy.createModel("Notificacion", {
                                 Tipo: mensaje.custom_fields.IdTipo,
                                 Titulo: mensaje.subject,
                                 Texto: mensaje.body,
-                                Alumno: data.IdAlumno,
+                                Alumno: datos.IdAlumno,
+                                Fecha: mensaje.custom_fields.Fecha,
                                 Asignatura: mensaje.custom_fields.Asignatura,
                                 Nota: mensaje.custom_fields.Nota,
+                                Profesor: mensaje.custom_fields.Profesor,
                                 Leida: false
                             });
                             var notificaciones = Alloy.Collections.Notificacion;
