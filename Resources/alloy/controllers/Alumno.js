@@ -22,7 +22,7 @@ function Controller() {
             alumno.save();
             coleccionAlumnos.fetch();
             $.btnEnviar.visible = true;
-            data.IdAlumno = alumno.IdAlumno;
+            data.IdAlumno = alumno.get("IdAlumno");
             var dialog1 = Ti.UI.createAlertDialog({
                 title: "El alumno se ha creado correctamente.",
                 style: Ti.UI.iPhone.AlertDialogStyle.DEFAULT,
@@ -660,7 +660,6 @@ function Controller() {
         title: "Guardar"
     });
     $.__views.winNuevoAlumno.add($.__views.btnGuardar);
-    GuardarAlumno ? $.__views.btnGuardar.addEventListener("click", GuardarAlumno) : __defers["$.__views.btnGuardar!click!GuardarAlumno"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     var arg1 = arguments[0] || {};
@@ -868,9 +867,43 @@ function Controller() {
         });
         dialog.show();
     });
+    var validationCallback = function(errors) {
+        if (errors.length > 0) {
+            for (var i = 0; errors.length > i; i++) Ti.API.debug(errors[i].message);
+            alert(errors[0].message);
+        } else GuardarAlumno();
+    };
+    var returnCallback = function() {
+        validator.run([ {
+            id: "nameField",
+            value: $.txtNombre.value,
+            display: "Nombre",
+            rules: "required|max_length[50]"
+        }, {
+            id: "surname1Field",
+            value: $.txtApellido1.value,
+            display: "Apellido1",
+            rules: "required|max_length[50]"
+        }, {
+            id: "surname2Field",
+            value: $.txtApellido2.value,
+            display: "Apellido2",
+            rules: "max_length[50]"
+        }, {
+            id: "emailField",
+            value: $.txtEmail.value,
+            display: "Email",
+            rules: "required|valid_email"
+        }, {
+            id: "emailProfField",
+            value: $.txtEmailProf.value,
+            display: "Password",
+            rules: "required|valid_email"
+        } ], validationCallback);
+    };
+    $.btnGuardar.addEventListener("click", returnCallback);
     __defers["$.__views.imgAlumno!click!sacarFoto"] && $.__views.imgAlumno.addEventListener("click", sacarFoto);
     __defers["$.__views.btnEnviar!click!EnviarDatos"] && $.__views.btnEnviar.addEventListener("click", EnviarDatos);
-    __defers["$.__views.btnGuardar!click!GuardarAlumno"] && $.__views.btnGuardar.addEventListener("click", GuardarAlumno);
     _.extend($, exports);
 }
 

@@ -56,6 +56,6 @@
 		</TableView>
 		<ImageView  left="10%" id="imgAlumno" height="15%" width="16%" top="2%" onClick="sacarFoto"></ImageView>
 		<Button class="button" top="2%" borderRadius="5dp" left="40%" height="25dp" width="80dp" onClick="EnviarDatos" id="btnEnviar" title="Enviar"></Button>
-		<Button class="button" top="-50dp" id="btnGuardar" title="Guardar" onClick="GuardarAlumno"></Button>
+		<Button class="button" top="-50dp" id="btnGuardar" title="Guardar"></Button>
 	</Window>
 </Alloy>

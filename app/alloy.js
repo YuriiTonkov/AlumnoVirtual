@@ -12,3 +12,5 @@
 var Cloud = require('ti.cloud');
 Cloud.debug = true;  // optional; if you add this line, set it to false for production
 
+var validate = require('hdjs.validate');
+var validator = new validate.FormValidator();

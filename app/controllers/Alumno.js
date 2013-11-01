@@ -99,8 +99,9 @@ function GuardarAlumno(){
         coleccionAlumnos.add(alumno);
         alumno.save();
         coleccionAlumnos.fetch(); 
+       
         $.btnEnviar.visible = true;
-        data.IdAlumno = alumno.IdAlumno;   
+        data.IdAlumno = alumno.get("IdAlumno");   
         var dialog1 = Ti.UI.createAlertDialog({
             title: 'El alumno se ha creado correctamente.',
             style: Ti.UI.iPhone.AlertDialogStyle.DEFAULT,
@@ -543,3 +544,58 @@ $.txtEmailProf.addEventListener("click", function(){
         });
         dialog.show();
 });
+
+
+
+//-----------PRUEBAS DE VALIDACION-----------------------
+
+
+
+var validationCallback = function(errors) {
+        if(errors.length > 0) {
+                for (var i = 0; i < errors.length; i++) {
+                        Ti.API.debug(errors[i].message);
+                }
+                alert(errors[0].message);
+        } else {
+               GuardarAlumno();
+        }
+};
+
+
+var returnCallback = function() {
+        validator.run([
+                                {
+                                        id: 'nameField',
+                                    value: $.txtNombre.value,
+                                    display: 'Nombre',    
+                                    rules: 'required|max_length[50]'
+                                },
+                                {
+                                        id: 'surname1Field',
+                                    value: $.txtApellido1.value,
+                                    display: 'Apellido1',    
+                                    rules: 'required|max_length[50]'
+                                },
+                                {
+                                        id: 'surname2Field',
+                                    value: $.txtApellido2.value,
+                                    display: 'Apellido2',    
+                                    rules: 'max_length[50]'
+                                },
+                                {
+                                        id: 'emailField',
+                                    value: $.txtEmail.value,
+                                    display: 'Email',    
+                                    rules: 'required|valid_email'
+                                },
+                                {
+                                        id: 'emailProfField',
+                                    value: $.txtEmailProf.value,
+                                    display: 'Password',    
+                                    rules: 'required|valid_email'
+                                }
+                        ], validationCallback);        
+};
+
+$.btnGuardar.addEventListener('click', returnCallback);
