@@ -46,28 +46,29 @@ if (data.IdAlumno == undefined){
 				}, function(e) {
 		    		if (e.success) {
 		        		Ti.API.info("Logged in user, id = " + e.users[0].id + ", session ID = " + Cloud.sessionId);
+		        		//Vamos a ver si tiene profesor asociado o no...
+						Cloud.Friends.search({
+					        user_id: e.users[0].id
+				        }, function (y) {
+					        if (y.success) {
+						        if (y.users.length == 0) {
+							       $.btnEnviar.visible=true;
+						        } else {
+							       $.btnEnviar.visible=false;
+						        }
+					        }
+					        else {
+						        table.setData([
+							        { title: (y.error && y.message) || y }
+						        ]);
+						        error(y);
+					        }
+				        });
 		    		} else {
 		        		Ti.API.info("Login failed.");
 		    		}
 				
-		//Vamos a ver si tiene profesor asociado o no...
-		Cloud.Friends.search({
-	        user_id: e.users[0].id
-        }, function (y) {
-	        if (y.success) {
-		        if (y.users.length == 0) {
-			       $.btnEnviar.visible=true;
-		        } else {
-			       $.btnEnviar.visible=false;
-		        }
-	        }
-	        else {
-		        table.setData([
-			        { title: (y.error && y.message) || y }
-		        ]);
-		        error(y);
-	        }
-        });
+		
 		});
 		}	
     }
@@ -142,7 +143,8 @@ function GuardarAlumno(){
 			    			   "CodPostal": $.txtCodPostal.value,
 			    			   "Telefono1":$.txtTelefono.value,
 			    			   "Telefono2": $.txtTelefono2.value,
-			    			   "Email2": $.txtEmail.value,
+			    			   "Email": $.txtEmail2.value,
+			    			   "Email2": $.txtEmail2.value,
 			    			   "Apellido2": $.txtApellido2.value,
 			    			   "Clase": $.txtClase.value,
 			    			   "EmailProfesor": $.txtEmailProf.value
@@ -186,15 +188,13 @@ function sacarFoto(){
 function consultarDatos(emailProfesorParam,profesorParam,callback){
 	
 	Cloud.Users.query({
-		    page: 1,
-		    per_page: 1,
 		    where: {
 		        role: 'Profesor',
 		        email: emailProfesorParam
 		    }
 				}, function (e) {
 				    if (e.success) {
-				    	profesorParam = (e.users.length > 0)?e.users[0].id:'0';
+				    	profesorParam = (e.users.length > 0)?e.users[0].id:'';
 				        alert ('Profesor=' + profesorParam);
 
 				      } else {
@@ -261,6 +261,7 @@ function EnviarDatos(){
 						    			   "CodPostal": datos2.CodPostal,
 						    			   "Telefono1": datos2.Telefono1,
 						    			   "Telefono2": datos2.Telefono2,
+						    			   "Email": datos2.Email,
 						    			   "Email2": datos2.Email2,
 						    			   "Apellido2": datos2.Apellido2,
 						    			   "Clase": datos2.Clase,

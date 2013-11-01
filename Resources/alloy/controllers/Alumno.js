@@ -63,7 +63,8 @@ function Controller() {
                     CodPostal: $.txtCodPostal.value,
                     Telefono1: $.txtTelefono.value,
                     Telefono2: $.txtTelefono2.value,
-                    Email2: $.txtEmail.value,
+                    Email: $.txtEmail2.value,
+                    Email2: $.txtEmail2.value,
                     Apellido2: $.txtApellido2.value,
                     Clase: $.txtClase.value,
                     EmailProfesor: $.txtEmailProf.value
@@ -95,15 +96,13 @@ function Controller() {
     }
     function consultarDatos(emailProfesorParam, profesorParam, callback) {
         Cloud.Users.query({
-            page: 1,
-            per_page: 1,
             where: {
                 role: "Profesor",
                 email: emailProfesorParam
             }
         }, function(e) {
             if (e.success) {
-                profesorParam = e.users.length > 0 ? e.users[0].id : "0";
+                profesorParam = e.users.length > 0 ? e.users[0].id : "";
                 alert("Profesor=" + profesorParam);
             } else {
                 profesorParam = "";
@@ -144,6 +143,7 @@ function Controller() {
                     CodPostal: datos2.CodPostal,
                     Telefono1: datos2.Telefono1,
                     Telefono2: datos2.Telefono2,
+                    Email: datos2.Email,
                     Email2: datos2.Email2,
                     Apellido2: datos2.Apellido2,
                     Clase: datos2.Clase,
@@ -692,17 +692,19 @@ function Controller() {
             login: datos.Email,
             password: "AlumnoVirtual"
         }, function(e) {
-            e.success ? Ti.API.info("Logged in user, id = " + e.users[0].id + ", session ID = " + Cloud.sessionId) : Ti.API.info("Login failed.");
-            Cloud.Friends.search({
-                user_id: e.users[0].id
-            }, function(y) {
-                if (y.success) $.btnEnviar.visible = 0 == y.users.length ? true : false; else {
-                    table.setData([ {
-                        title: y.error && y.message || y
-                    } ]);
-                    error(y);
-                }
-            });
+            if (e.success) {
+                Ti.API.info("Logged in user, id = " + e.users[0].id + ", session ID = " + Cloud.sessionId);
+                Cloud.Friends.search({
+                    user_id: e.users[0].id
+                }, function(y) {
+                    if (y.success) $.btnEnviar.visible = 0 == y.users.length ? true : false; else {
+                        table.setData([ {
+                            title: y.error && y.message || y
+                        } ]);
+                        error(y);
+                    }
+                });
+            } else Ti.API.info("Login failed.");
         });
     }
     $.winNuevoAlumno.addEventListener("close", function() {
