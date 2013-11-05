@@ -8,18 +8,10 @@ var alumno = Alloy.Collections.Alumno;
 
 
 if (data.IdAlumno == undefined){
-    //$.btnAnterior.visible="false";
-   // $.btnSiguiente.visible="false";
    $.btnEnviar.visible = "false";
-}else{
-        //Si viene un idalumno, la pantalla debe ser de actualizacion, se deben mostrar los datos
-       // $.btnAnterior.visible="true";
-       // $.btnSiguiente.visible="true";
-        //alumno.fetch();
-        
+}else{        
         var model = alumno.get(data.IdAlumno);
-        var datos = model.toJSON();
-        
+        var datos = model.toJSON();       
         
         $.txtNombre.value = datos.Nombre;
         $.txtApellido1.value = datos.Apellido1;
@@ -178,11 +170,11 @@ function sacarFoto(){
             var d=new Date();
             var filename = d.getTime() + ".png";
             var f = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory,filename);
-            f.write(image);
+            var redImage = image.imageAsResized(544,408);
+            f.write(redImage);
             $.imgAlumno.image=f.nativePath;
             $.imgAlumno.visible=true;
-            //Titanium.API.info('taken picture.. path is;-');
-            //Titanium.API.info(f.nativePath);
+
     }
 });
 }
@@ -278,6 +270,14 @@ function EnviarDatos(){
 							
 							//AVISO 
 							var user = e.users[0];
+							//Realizamos la solicitud al profesor para que pueda añadir al alumno a su dispositivo	
+							Cloud.Friends.add({ user_ids: profesor}, function(p) {
+								        if (p.success) {
+									        alert('La solicitud se ha enviado al profesor.');
+								        } else {
+									        alert('La solicitud ha fallado.');
+								        }
+					        });
 					        alert('Success:\n' +
 					            'id: ' + user.id + '\n' +
 					            'sessionId: ' + Cloud.sessionId + '\n' +
@@ -288,14 +288,7 @@ function EnviarDatos(){
 					        alert('Error:\n' +
 					            ((e.error && e.message) || JSON.stringify(e)));
 					    }
-					    //Realizamos la solicitud al profesor para que pueda añadir al alumno a su dispositivo	
-						Cloud.Friends.add({ user_ids: profesor}, function(e) {
-								        if (e.success) {
-									        alert('La solicitud se ha enviado al profesor.');
-								        } else {
-									        alert('La solicitud ha fallado.');
-								        }
-					        });
+					    
 					});
 				
 				}

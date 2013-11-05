@@ -88,7 +88,8 @@ function Controller() {
                 var d = new Date();
                 var filename = d.getTime() + ".png";
                 var f = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, filename);
-                f.write(image);
+                var redImage = image.imageAsResized(544, 408);
+                f.write(redImage);
                 $.imgAlumno.image = f.nativePath;
                 $.imgAlumno.visible = true;
             }
@@ -158,13 +159,13 @@ function Controller() {
                     });
                     modelActual.save();
                     var user = e.users[0];
+                    Cloud.Friends.add({
+                        user_ids: profesor
+                    }, function(p) {
+                        p.success ? alert("La solicitud se ha enviado al profesor.") : alert("La solicitud ha fallado.");
+                    });
                     alert("Success:\nid: " + user.id + "\n" + "sessionId: " + Cloud.sessionId + "\n" + "first name: " + user.first_name + "\n" + "last name: " + user.last_name);
                 } else alert("Error:\n" + (e.error && e.message || JSON.stringify(e)));
-                Cloud.Friends.add({
-                    user_ids: profesor
-                }, function(e) {
-                    e.success ? alert("La solicitud se ha enviado al profesor.") : alert("La solicitud ha fallado.");
-                });
             });
         });
     }
