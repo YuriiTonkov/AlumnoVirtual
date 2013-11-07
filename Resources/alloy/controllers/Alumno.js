@@ -113,6 +113,9 @@ function Controller() {
         });
     }
     function EnviarDatos() {
+        $.activityScreen.show();
+        $.winNuevoAlumno.touchEnabled = false;
+        $.btnEnviar.visible = false;
         var alu = Alloy.Collections.Alumno;
         alu.fetch();
         var model = alu.get(data.IdAlumno);
@@ -126,6 +129,8 @@ function Controller() {
                     alert("La solicitud se ha enviado al profesor.");
                     $.btnEnviar.visible = false;
                 } else alert("La solicitud ha fallado.");
+                $.activityScreen.hide();
+                $.winNuevoAlumno.touchEnabled = true;
             });
         }) : consultarDatos(datos2.EmailProfesor, "", function(callbackEmail, callbackProf) {
             var profesor = callbackProf;
@@ -162,10 +167,22 @@ function Controller() {
                     Cloud.Friends.add({
                         user_ids: profesor
                     }, function(p) {
-                        p.success ? alert("La solicitud se ha enviado al profesor.") : alert("La solicitud ha fallado.");
+                        if (p.success) {
+                            alert("La solicitud se ha enviado al profesor.");
+                            $.activityScreen.hide();
+                            $.winNuevoAlumno.touchEnabled = true;
+                        } else {
+                            alert("La solicitud ha fallado.");
+                            $.activityScreen.hide();
+                            $.winNuevoAlumno.touchEnabled = true;
+                        }
                     });
                     alert("Success:\nid: " + user.id + "\n" + "sessionId: " + Cloud.sessionId + "\n" + "first name: " + user.first_name + "\n" + "last name: " + user.last_name);
-                } else alert("Error:\n" + (e.error && e.message || JSON.stringify(e)));
+                } else {
+                    alert("Error:\n" + (e.error && e.message || JSON.stringify(e)));
+                    $.activityScreen.hide();
+                    bueno$.winNuevoAlumno.touchEnabled = true;
+                }
             });
         });
     }
@@ -184,6 +201,20 @@ function Controller() {
         id: "winNuevoAlumno"
     });
     $.__views.winNuevoAlumno && $.addTopLevelView($.__views.winNuevoAlumno);
+    $.__views.activityScreen = Ti.UI.createActivityIndicator({
+        style: Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,
+        font: {
+            fontFamily: "HelveticaNeue",
+            fontSize: 15
+        },
+        top: 10,
+        left: 100,
+        height: Ti.UI.SIZE,
+        width: Ti.UI.SIZE,
+        id: "activityScreen",
+        message: "Enviando..."
+    });
+    $.__views.winNuevoAlumno.add($.__views.activityScreen);
     $.__views.__alloyId0 = Ti.UI.createTableViewRow({
         backgroundColor: "white",
         height: "40dp",

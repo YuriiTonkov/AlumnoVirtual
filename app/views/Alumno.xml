@@ -1,5 +1,6 @@
 <Alloy>
 	<Window id="winNuevoAlumno" class="container">
+		<ActivityIndicator class="cargando" id="activityScreen" message="Enviando..."/>
 		<TableView top="10%" id="Marco">
 			<TableViewRow height="40dp">
 			 	<Label class="labelAlumno">Nombre</Label>

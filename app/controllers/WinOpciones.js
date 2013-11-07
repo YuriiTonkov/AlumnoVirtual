@@ -13,8 +13,10 @@ var datos = model.toJSON();
 //Sincronizacion con la información en la NUBE.
       
 if (datos.UsuarioCloud==true){
-
+	
 	$.activityScreen.show();
+	$.WinOpciones.touchEnabled=false;
+	
 		//Ya tiene usuario en la nube
 				Cloud.Users.login({ 
 		    	login: datos.Email,
@@ -35,7 +37,10 @@ if (datos.UsuarioCloud==true){
 				                   $.numAvisos.text = avisos.length;
 				                   var apuntes = notificaciones.where({Alumno: datos.IdAlumno, Tipo:3, Leida:0});
 				                   $.numApuntes.text = apuntes.length;
+				                
 				                   $.activityScreen.hide();
+				                   $.WinOpciones.touchEnabled=true;
+				                  
 				                } else {
 					                var data = [];
 					                
@@ -76,22 +81,33 @@ if (datos.UsuarioCloud==true){
 								    $.numAvisos.text = avisos.length;
 								    var apuntes = notificaciones.where({Alumno: datos.IdAlumno, Tipo:3, Leida:0});
 								    $.numApuntes.text = apuntes.length;
+								    
 								    $.activityScreen.hide();
-								     
+								    $.WinOpciones.touchEnabled=true;
+								
+				            
 					            }
 				            } else {
 								alert("Error de sincronizacion"+  u.message);
+								
 								$.activityScreen.hide();
+								$.WinOpciones.touchEnabled=true;
+								
 				            }
 				        });
 		        		
 		    		} else {
 		        		alert("Login failed.");
-		        		$.activityScreen.hide();
+		        		$.WinOpciones.close();
+		        		//$.activityScreen.hide();
 		    		}
 		    	
 		    	});
 		    }
+
+
+//funciones
+
 
 
 

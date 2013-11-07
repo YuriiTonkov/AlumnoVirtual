@@ -185,6 +185,7 @@ function Controller() {
     var datos = model.toJSON();
     if (true == datos.UsuarioCloud) {
         $.activityScreen.show();
+        $.WinOpciones.touchEnabled = false;
         Cloud.Users.login({
             login: datos.Email,
             password: "AlumnoVirtual"
@@ -214,6 +215,7 @@ function Controller() {
                         });
                         $.numApuntes.text = apuntes.length;
                         $.activityScreen.hide();
+                        $.WinOpciones.touchEnabled = true;
                     } else {
                         for (var i = 0, l = u.messages.length; l > i; i++) {
                             var mensaje = u.messages[i];
@@ -257,14 +259,16 @@ function Controller() {
                         });
                         $.numApuntes.text = apuntes.length;
                         $.activityScreen.hide();
+                        $.WinOpciones.touchEnabled = true;
                     } else {
                         alert("Error de sincronizacion" + u.message);
                         $.activityScreen.hide();
+                        $.WinOpciones.touchEnabled = true;
                     }
                 });
             } else {
                 alert("Login failed.");
-                $.activityScreen.hide();
+                $.WinOpciones.close();
             }
         });
     }

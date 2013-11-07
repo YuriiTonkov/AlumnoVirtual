@@ -202,6 +202,9 @@ function consultarDatos(emailProfesorParam,profesorParam,callback){
 			
 }
 function EnviarDatos(){
+	$.activityScreen.show();
+	$.winNuevoAlumno.touchEnabled=false;
+	$.btnEnviar.visible=false;
 	var alu = Alloy.Collections.Alumno;
 	alu.fetch();
 	var model = alu.get(data.IdAlumno);
@@ -214,6 +217,8 @@ function EnviarDatos(){
 		var profe = callbackProf;
 		if (profe == ''){
 				alert('El Mail de profesor no aparece en nuestra Base de Datos. Compruebe los datos');
+				$.activityScreen.hide();
+				$.winNuevoAlumno.touchEnabled=true;
 		}else{
 				Cloud.Friends.add({ user_ids: profe}, function(e) {
 								        if (e.success) {
@@ -222,6 +227,8 @@ function EnviarDatos(){
 								        } else {
 									        alert('La solicitud ha fallado.');
 								        }
+								        $.activityScreen.hide();
+				                   		$.winNuevoAlumno.touchEnabled=true;
 					        });
 			}
 	});
@@ -239,6 +246,7 @@ function EnviarDatos(){
 			
 			if (profesor == ''){
 				alert('El Mail de profesor no aparece en nuestra Base de Datos. Compruebe los datos');
+				
 			}else{
 						Cloud.Users.create({
 						    email: datos2.Email,
@@ -274,9 +282,14 @@ function EnviarDatos(){
 							Cloud.Friends.add({ user_ids: profesor}, function(p) {
 								        if (p.success) {
 									        alert('La solicitud se ha enviado al profesor.');
+									        $.activityScreen.hide();
+											$.winNuevoAlumno.touchEnabled=true;
 								        } else {
 									        alert('La solicitud ha fallado.');
+									        $.activityScreen.hide();
+											$.winNuevoAlumno.touchEnabled=true;
 								        }
+								       
 					        });
 					        alert('Success:\n' +
 					            'id: ' + user.id + '\n' +
@@ -287,12 +300,16 @@ function EnviarDatos(){
 					    } else {
 					        alert('Error:\n' +
 					            ((e.error && e.message) || JSON.stringify(e)));
+					            $.activityScreen.hide();
+								bueno$.winNuevoAlumno.touchEnabled=true;
+					           
 					    }
 					    
 					});
 				
 				}
-			} );
+			});
+			
 	}
 }
 
