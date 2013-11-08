@@ -144,10 +144,10 @@ function GuardarAlumno(){
 			    			   }
 			    }, function (e) {
 		            if (e.success) {
-		                alert('Updated!');
+		                alert('Actualizado!');
 		            }
 		            else {
-		                error(e);
+		                alert('Hubo un error actualizando los datos cloud');
             		}
        });
        }
@@ -260,8 +260,8 @@ function EnviarDatos(){
 						    			   "Padre":datos2.Padre,
 						    			   "Direccion": datos2.Direccion,
 						    			   "CodPostal": datos2.CodPostal,
-						    			   "Telefono1": datos2.Telefono1,
-						    			   "Telefono2": datos2.Telefono2,
+						    			   "Telefono1": datos2.TelContacto,
+						    			   "Telefono2": datos2.TelContacto2,
 						    			   "Email": datos2.Email,
 						    			   "Email2": datos2.Email2,
 						    			   "Apellido2": datos2.Apellido2,

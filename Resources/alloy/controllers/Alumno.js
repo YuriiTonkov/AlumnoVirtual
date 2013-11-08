@@ -70,7 +70,7 @@ function Controller() {
                     EmailProfesor: $.txtEmailProf.value
                 }
             }, function(e) {
-                e.success ? alert("Updated!") : error(e);
+                e.success ? alert("Actualizado!") : alert("Hubo un error actualizando los datos cloud");
             });
             var dialog2 = Ti.UI.createAlertDialog({
                 title: "La información del alumno se ha almacenado correctamente.",
@@ -122,7 +122,11 @@ function Controller() {
         var datos2 = model.toJSON();
         true == datos2.UsuarioCloud ? consultarDatos(datos.EmailProfesor, "", function(callbackEmail, callbackProf) {
             var profe = callbackProf;
-            "" == profe ? alert("El Mail de profesor no aparece en nuestra Base de Datos. Compruebe los datos") : Cloud.Friends.add({
+            if ("" == profe) {
+                alert("El Mail de profesor no aparece en nuestra Base de Datos. Compruebe los datos");
+                $.activityScreen.hide();
+                $.winNuevoAlumno.touchEnabled = true;
+            } else Cloud.Friends.add({
                 user_ids: profe
             }, function(e) {
                 if (e.success) {
